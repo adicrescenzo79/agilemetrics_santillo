@@ -4,10 +4,11 @@ let app = new Vue({
   data:{
     posts:[],
   },
-  created(){
+  mounted(){
     axios.get('http://localhost:8000/api/posts',{
     }).then((response)=>{
       this.posts = response.data.data;
+      console.log(response);
     });
   },
   methods:{
