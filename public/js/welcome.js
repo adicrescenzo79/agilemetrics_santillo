@@ -97,14 +97,34 @@ Vue.config.devtools = true;
 var app = new Vue({
   el: '#main-welcome',
   data: {
+    api_token: '',
     posts: []
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('http://localhost:8000/api/posts', {}).then(function (response) {
-      _this.posts = response.data.data;
-      console.log(response);
+    // axios.get('http://localhost:8000/api/user', {
+    // }).then((response)=>{
+    // // handle success
+    //   console.log(response);
+    // }).catch((error)=>{
+    // // handle error
+    //   console.log(error);
+    // });
+    axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
+      console.log(response.data.success);
+
+      if (response.data.success) {
+        axios.get('http://localhost:8000/api/postsLogged', {}).then(function (response) {
+          console.log(response.data.data);
+          _this.posts = response.data.data;
+        });
+      } else {
+        axios.get('http://localhost:8000/api/postsNotLogged', {}).then(function (response) {
+          console.log(response.data.data);
+          _this.posts = response.data.data;
+        });
+      }
     });
   },
   methods: {}

@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $newUser = new User();
 
         $user["password"] = Hash::make($user["password"]);
+        $user["api_token"] = Str::random(60);
         $newUser->fill($user)->save();
       }
     }

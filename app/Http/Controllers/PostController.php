@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-  public function index()
+  public function notLogged()
   {
-      return response()->json([Auth::check()]);
-
       $posts = Post::where('visibility', '=', 1)->get();
 
       return response()->json([
