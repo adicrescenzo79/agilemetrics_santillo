@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
-use App\Post;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,7 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+      $id = Auth::id();
+      $posts = Post::where('user_id', '=', $id)->get();
+      return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -28,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.posts.create');
     }
 
     /**
@@ -39,7 +42,37 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        // 'category_id' => 'exists:categories,id|nullable',
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'cover' => 'nullable|image|max:6000',
+        // 'tag_ids.*' => 'exists:tags,id',
+      ]);
+
+
+      $data = $request->all();
+
+      $post = new Post();
+      $post->fill($data);
+
+      $post->slug = $this->generateSlug($post->title);
+
+      $cover = NULL;
+      if (array_key_exists('cover', $data)) {
+        $cover = Storage::put('uploads', $data['cover']);
+        $post->cover = 'storage/' . $cover;
+      }
+
+      $post->save();
+
+      // if (array_key_exists('tag_ids', $data)) {
+      //   $post->tags()->attach($data['tag_ids']);
+      // }
+
+      // Mail::to('nail@mail.it')->send(new SendNewMail());
+
+      return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -50,7 +83,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+      return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -61,7 +94,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+      return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -73,7 +106,41 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+      $request->validate([
+        // 'category_id' => 'exists:categories,id|nullable',
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'cover' => 'nullable|image|max:6000',
+        // 'tag_ids.*' => 'exists:tags,id',
+      ]);
+
+      $data = $request->all();
+
+      // qui va fatta la creazione dell'immagine
+
+      $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title'], $post->slug);
+
+      if (array_key_exists('cover', $data)) {
+        $cover = Storage::put('uploads', $data['cover']);
+        $data['cover'] = 'storage/' . $cover;
+      }
+
+
+
+      $post->update($data);
+
+
+      // if (array_key_exists('tag_ids', $data)) {
+      //   $post->tags()->sync($data['tag_ids']);
+      // } else {
+      //   $post->tags()->detach();
+      // }
+
+
+
+      $post->save();
+
+      return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -84,6 +151,31 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+      $post->delete();
+
+      return redirect()->route('admin.posts.index');
     }
+
+    private function generateSlug(string $title, bool $change = true)
+    {
+      $slug = Str::slug($title, '-');
+
+      if (!$change) {
+        return $slug;
+      }
+
+      $slug_base = $slug;
+      $contatore = 1;
+
+      $post_with_slug = Post::where('slug', '=', $slug)->first();
+      while ($post_with_slug) {
+        $slug = $slug_base . '-' . $contatore;
+        $contatore++;
+
+        $post_with_slug = Post::where('slug', '=', $slug)->first();
+      }
+      return $slug;
+
+    }
+
 }

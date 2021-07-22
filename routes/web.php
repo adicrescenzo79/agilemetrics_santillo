@@ -24,3 +24,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/usersapi', 'UserController@index');
+
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
+->group(function (){
+  Route::resource('posts', 'PostController');
+});

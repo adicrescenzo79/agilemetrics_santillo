@@ -29,9 +29,14 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
+                            {{ Auth::user()->email }}
+
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          @if (Auth::user()->email = "limone79@gmail.com")
+                            <a class="dropdown-item" href="{{route('admin.posts.index')}}">I tuoi post</a>
+                          @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
