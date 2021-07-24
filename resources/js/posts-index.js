@@ -1,6 +1,6 @@
 Vue.config.devtools = true;
 let app = new Vue({
-  el: '#main-welcome',
+  el: '#main-guests-posts-index',
   data:{
     api_token: '',
     posts: [],
@@ -17,17 +17,17 @@ let app = new Vue({
 
   axios.get('http://localhost:8000/usersapi',{
   }).then((response)=>{
-    console.log(response.data.success);
+    // console.log(response.data.success);
     if (response.data.success) {
       axios.get('http://localhost:8000/api/postsLogged', {
       }).then((response)=>{
-        console.log(response.data.data);
+        // console.log(response.data.data);
         this.posts = response.data.data;
       });
     } else {
       axios.get('http://localhost:8000/api/postsNotLogged', {
       }).then((response)=>{
-        console.log(response.data.data);
+        // console.log(response.data.data);
         this.posts = response.data.data;
       });
     }

@@ -28,4 +28,16 @@ class PostController extends Controller
       ]);
   }
 
+  public function postBySlug(string $slug)
+  {
+    $post = Post::where('slug', '=', $slug)->first();
+
+    return response()->json([
+      'data' => $post,
+      'success' => true,
+    ]);
+
+  }
+
+
 }

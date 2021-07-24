@@ -17,13 +17,28 @@ use Illuminate\Support\Facades\Auth;
 */
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');;
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/usersapi', 'UserController@index');
+
+Route::get('/security', function () {
+    return view('security');
+});
+
+Route::get('posts', function () {
+    return view('guests.posts.index');
+})->name('posts.index');
+
+
+Route::get('posts/{slug}', function () {
+    return view('guests.posts.show');
+})->name('posts.show');
+
+
 
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 ->group(function (){

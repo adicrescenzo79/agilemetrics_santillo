@@ -20,8 +20,12 @@ class PostController extends Controller
     public function index()
     {
       $id = Auth::id();
-      $posts = Post::where('user_id', '=', $id)->get();
-      return view('admin.posts.index', compact('posts'));
+      if ($id == 1) {
+        $posts = Post::where('user_id', '=', $id)->get();
+        return view('admin.posts.index', compact('posts'));
+      } else {
+        return view('security');
+      }
     }
 
     /**
