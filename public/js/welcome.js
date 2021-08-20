@@ -112,11 +112,9 @@ var app = new Vue({
     // // handle error
     //   console.log(error);
     // });
-    console.log('ciao');
-    var cookieSplitted = document.cookie.split(';');
-    var visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    var now = new Date();
-    document.cookie = "lastVisit=" + now;
+    // let cookieSplitted = document.cookie.split(';');
+    // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
+    this.dateCheck();
     axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
       // console.log(response.data.success);
       if (response.data.success) {
@@ -132,7 +130,31 @@ var app = new Vue({
       }
     });
   },
-  methods: {}
+  methods: {
+    getCookie: function getCookie(name) {
+      var value = "; ".concat(document.cookie);
+      var parts = value.split("; ".concat(name, "="));
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    },
+    dateCheck: function dateCheck() {
+      var cookieLastVisit = this.getCookie('cookieLastVisit');
+      var cookieLastVisitNew = this.getCookie('cookieLastVisitNew');
+      var now = new Date(); // dayjs.extend(LocalizedFormat)
+
+      var nowFormat = dayjs(now).format('MM/DD/YYYY');
+      var cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
+      var cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
+      console.log(cookieLastVisitFormat);
+
+      if (nowFormat === cookieLastVisitNewFormat) {
+        console.log('non cambio');
+      } else {
+        console.log('cambio');
+        document.cookie = "cookieLastVisitNew=" + now;
+        document.cookie = "cookieLastVisit=" + now;
+      }
+    }
+  }
 });
 
 /***/ }),
