@@ -18,3 +18,4 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.js('resources/js/posts-index.js', 'public/js');
 mix.js('resources/js/post-show.js', 'public/js');
+mix.js('resources/js/welcome.js', 'public/js');

@@ -12,5 +12,5 @@
 @endsection
 
 @section('foot-script')
-{{-- <script src="{{asset('js/welcome.js')}}" charset="utf-8"></script> --}}
+<script src="{{asset('js/welcome.js')}}" charset="utf-8"></script>
 @endsection

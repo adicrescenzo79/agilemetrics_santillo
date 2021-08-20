@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -93,11 +93,51 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\adicr\\Documents\\Boolean\\agilemetrics_santillo\\resources\\js\\welcome.js'");
+Vue.config.devtools = true;
+var app = new Vue({
+  el: '#main-welcome',
+  data: {
+    api_token: '',
+    posts: [],
+    lastVisit: ''
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // axios.get('http://localhost:8000/api/user', {
+    // }).then((response)=>{
+    // // handle success
+    //   console.log(response);
+    // }).catch((error)=>{
+    // // handle error
+    //   console.log(error);
+    // });
+    console.log('ciao');
+    var cookieSplitted = document.cookie.split(';');
+    var visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
+    var now = new Date();
+    document.cookie = "lastVisit=" + now;
+    axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
+      // console.log(response.data.success);
+      if (response.data.success) {
+        axios.get('http://localhost:8000/api/postsLogged', {}).then(function (response) {
+          // console.log(response.data.data);
+          _this.posts = response.data.data;
+        });
+      } else {
+        axios.get('http://localhost:8000/api/postsNotLogged', {}).then(function (response) {
+          // console.log(response.data.data);
+          _this.posts = response.data.data;
+        });
+      }
+    });
+  },
+  methods: {}
+});
 
 /***/ }),
 
-/***/ 1:
+/***/ 3:
 /*!***************************************!*\
   !*** multi ./resources/js/welcome.js ***!
   \***************************************/
