@@ -17,7 +17,11 @@ let app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    this.dateCheck();
+    let cookieConsent = getCookie('cookieConsent');
+    if (cookieConsent) {
+      this.dateCheck();
+    }
+
     // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
 

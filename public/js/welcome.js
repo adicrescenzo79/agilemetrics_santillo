@@ -114,8 +114,13 @@ var app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    this.dateCheck(); // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+    var cookieConsent = getCookie('cookieConsent');
+
+    if (cookieConsent) {
+      this.dateCheck();
+    } // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+
 
     axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
       // console.log(response.data.success);
