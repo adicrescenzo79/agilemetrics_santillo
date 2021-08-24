@@ -25,17 +25,17 @@ let app = new Vue({
     // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
 
-  axios.get('http://localhost:8000/usersapi',{
+  axios.get('/usersapi',{
   }).then((response)=>{
     // console.log(response.data.success);
     if (response.data.success) {
-      axios.get('http://localhost:8000/api/postsLogged', {
+      axios.get('/api/postsLogged', {
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;
       });
     } else {
-      axios.get('http://localhost:8000/api/postsNotLogged', {
+      axios.get('/api/postsNotLogged', {
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;

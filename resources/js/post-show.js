@@ -17,7 +17,7 @@ let app = new Vue({
   },
   methods:{
     postBySlug: function(){
-    axios.get(`http://localhost:8000/api/posts/slug/${this.slug}`,{
+    axios.get(`/api/posts/slug/${this.slug}`,{
     }).then((response)=>{
       this.post = response.data.data;
       // console.log(response.data.data);

@@ -122,15 +122,15 @@ var app = new Vue({
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
 
 
-    axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
+    axios.get('/usersapi', {}).then(function (response) {
       // console.log(response.data.success);
       if (response.data.success) {
-        axios.get('http://localhost:8000/api/postsLogged', {}).then(function (response) {
+        axios.get('/api/postsLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
         });
       } else {
-        axios.get('http://localhost:8000/api/postsNotLogged', {}).then(function (response) {
+        axios.get('/api/postsNotLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
         });

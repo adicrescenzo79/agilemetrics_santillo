@@ -15,17 +15,17 @@ let app = new Vue({
     //   console.log(error);
     // });
 
-  axios.get('http://localhost:8000/usersapi',{
+  axios.get('/usersapi',{
   }).then((response)=>{
     // console.log(response.data.success);
     if (response.data.success) {
-      axios.get('http://localhost:8000/api/postsLogged', {
+      axios.get('/api/postsLogged', {
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;
       });
     } else {
-      axios.get('http://localhost:8000/api/postsNotLogged', {
+      axios.get('/api/postsNotLogged', {
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;

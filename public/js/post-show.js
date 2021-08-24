@@ -112,7 +112,7 @@ var app = new Vue({
     postBySlug: function postBySlug() {
       var _this = this;
 
-      axios.get("http://localhost:8000/api/posts/slug/".concat(this.slug), {}).then(function (response) {
+      axios.get("/api/posts/slug/".concat(this.slug), {}).then(function (response) {
         _this.post = response.data.data; // console.log(response.data.data);
 
         _this.cover = 'background-image: url(' + _this.post.cover + ')';
