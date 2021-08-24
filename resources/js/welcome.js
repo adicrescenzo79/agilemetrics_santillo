@@ -18,7 +18,8 @@ let app = new Vue({
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
     this.dateCheck();
-
+    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
 
   axios.get('http://localhost:8000/usersapi',{
   }).then((response)=>{
@@ -44,25 +45,33 @@ methods:{
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   },
+
   dateCheck: function(){
     let cookieLastVisit = this.getCookie('cookieLastVisit');
-    let cookieLastVisitNew = this.getCookie('cookieLastVisitNew');
+    // console.log('ultima visita ' + cookieLastVisit);
+    let cookieControl = this.getCookie('cookieControl');
+    // console.log('controllo ' + cookieControl);
 
-    var now = new Date();
     // dayjs.extend(LocalizedFormat)
-    let nowFormat = dayjs(now).format('MM/DD/YYYY');
-    let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
-    let cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
+    let now = new Date();
+    now = dayjs(now).format('MMMM D, YYYY');
+    // console.log('oggi ' + now);
+    // let nowFormat = dayjs(now).format('MM/DD/YYYY');
+    // console.log(nowFormat);
+    // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
+    // console.log(cookieLastVisitFormat);
+    // let cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
+    // console.log(cookieLastVisitNewFormat);
 
 
-    console.log(cookieLastVisitFormat);
+    // console.log(cookieLastVisitFormat);
 
 
-    if (nowFormat === cookieLastVisitNewFormat) {
-      console.log('non cambio');
+    if (now === cookieControl) {
+      // console.log('non cambio');
     } else {
-      console.log('cambio');
-      document.cookie = "cookieLastVisitNew="+now;
+      // console.log('cambio');
+      document.cookie = "cookieControl="+now;
       document.cookie = "cookieLastVisit="+now;
     }
 

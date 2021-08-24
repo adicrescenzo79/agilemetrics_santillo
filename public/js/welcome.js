@@ -114,7 +114,9 @@ var app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    this.dateCheck();
+    this.dateCheck(); // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+
     axios.get('http://localhost:8000/usersapi', {}).then(function (response) {
       // console.log(response.data.success);
       if (response.data.success) {
@@ -137,20 +139,25 @@ var app = new Vue({
       if (parts.length === 2) return parts.pop().split(';').shift();
     },
     dateCheck: function dateCheck() {
-      var cookieLastVisit = this.getCookie('cookieLastVisit');
-      var cookieLastVisitNew = this.getCookie('cookieLastVisitNew');
-      var now = new Date(); // dayjs.extend(LocalizedFormat)
+      var cookieLastVisit = this.getCookie('cookieLastVisit'); // console.log('ultima visita ' + cookieLastVisit);
 
-      var nowFormat = dayjs(now).format('MM/DD/YYYY');
-      var cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
-      var cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
-      console.log(cookieLastVisitFormat);
+      var cookieControl = this.getCookie('cookieControl'); // console.log('controllo ' + cookieControl);
+      // dayjs.extend(LocalizedFormat)
 
-      if (nowFormat === cookieLastVisitNewFormat) {
-        console.log('non cambio');
+      var now = new Date();
+      now = dayjs(now).format('MMMM D, YYYY'); // console.log('oggi ' + now);
+      // let nowFormat = dayjs(now).format('MM/DD/YYYY');
+      // console.log(nowFormat);
+      // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
+      // console.log(cookieLastVisitFormat);
+      // let cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
+      // console.log(cookieLastVisitNewFormat);
+      // console.log(cookieLastVisitFormat);
+
+      if (now === cookieControl) {// console.log('non cambio');
       } else {
-        console.log('cambio');
-        document.cookie = "cookieLastVisitNew=" + now;
+        // console.log('cambio');
+        document.cookie = "cookieControl=" + now;
         document.cookie = "cookieLastVisit=" + now;
       }
     }
