@@ -1,8 +1,8 @@
-<div class="container">
+<div id="cookies" class="container">
 
-  <div class="cookies">
+  <div class="cookies d-flex justify-content-center align-items-baseline pt-3 pb-3">
     <p>Questo sito utilizza i cookies per offrire un'esperienza migliore all'utente. </p>
-    <button class="cookieButton btn btn-primary" type="button" name="button">Consenti i cookies</button>
+    <button class="cookieButton btn btn-primary ml-3" type="button" name="button">Consenti i cookies</button>
   </div>
 </div>
 
@@ -19,7 +19,7 @@
   console.log(cookieConsent);
 
   if (cookieConsent) {
-    $('.cookies').hide();
+    $('#cookies').hide();
   }
 
   function getCookie(name) {

@@ -10016,6 +10016,15 @@ h3 {
   color: #fff;
 }
 
+.btn-primary {
+  background-color: #903B3E;
+  border-color: #752f31;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #752f31;
+  border-color: #752f31;
+}
+
 .navbar-light .navbar-brand {
   color: #fff;
 }

@@ -6,3 +6,15 @@
 .txt-white{
   color: #fff;
 }
+
+//buttons
+.btn-primary{
+  background-color: $bordeauxPrimary;
+  border-color: #752f31;
+  &:hover,
+  &:focus{
+    background-color: #752f31;
+    border-color: #752f31;
+
+  }
+}

@@ -37,11 +37,12 @@
 
     @include('partials.header')
 
+    @include('partials.cookieConsent')
+
     <main class="py-4">
       @yield('content')
     </main>
 
-    @include('partials.cookieConsent')
 
     @include('partials.footer')
 
