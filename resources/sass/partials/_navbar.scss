@@ -1,0 +1,32 @@
+.navbar-light{
+  .navbar-brand{
+    color: #fff;
+    &:hover,
+    &:focus{
+      color: #fff;
+      opacity: 0.5 !important;;
+    }
+  }
+
+  .navbar-nav{
+    .nav-link{
+      color: #fff;
+      &:hover,
+      &:focus{
+        color: #fff;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  // .dropdown
+  .dropdown-item{
+    color: #fff;
+    &:hover,
+    &:focus{
+      background-color: $bordeauxPrimary;
+      opacity: 0.5;
+    }
+  }
+
+}

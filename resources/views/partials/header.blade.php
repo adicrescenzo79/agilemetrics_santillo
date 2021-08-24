@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar bg-bordeaux navbar-expand-md navbar-light shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       {{ config('app.name', 'Laravel') }}
@@ -22,7 +22,7 @@
 
         @guest
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Area Clienti</a>
+            <a class="nav-link" href="{{ route('login') }}">Area Iscritti</a>
           </li>
           {{-- @if (Route::has('register'))
             <li class="nav-item">
@@ -30,14 +30,14 @@
             </li>
           @endif --}}
         @else
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          <li class="nav-item dropdown ">
+            <a id="navbarDropdown" class="text-capitalize nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }}
 
             </a>
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              @if (Auth::user()->email == "limone79@gmail.com")
+            <div class="dropdown-menu dropdown-menu-right bg-bordeaux" aria-labelledby="navbarDropdown">
+              @if (Auth::user()->email == "luca.santillo@gmail.com")
                 <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Contenuti</a>
               @endif
               <a class="dropdown-item" href="{{ route('logout') }}"
