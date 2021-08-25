@@ -68,7 +68,7 @@ class PostController extends Controller
       $cover = NULL;
       if (array_key_exists('cover', $data)) {
         $cover = Storage::put('uploads', $data['cover']);
-        $post->cover = 'storage/' . $cover;
+        $post->cover = '../storage/' . $cover;
       }
 
       $post->save();
