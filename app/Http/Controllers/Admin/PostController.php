@@ -51,6 +51,8 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|image|max:6000',
+        'visibility' => 'required|boolean',
+
         // 'tag_ids.*' => 'exists:tags,id',
       ]);
 
@@ -58,6 +60,7 @@ class PostController extends Controller
       $data = $request->all();
 
       $post = new Post();
+      $post['user_id'] = Auth::id();
       $post->fill($data);
 
       $post->slug = $this->generateSlug($post->title);
@@ -115,6 +118,8 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|image|max:6000',
+        'visibility' => 'required|boolean',
+
         // 'tag_ids.*' => 'exists:tags,id',
       ]);
 

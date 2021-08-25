@@ -55,6 +55,28 @@
 
             </div>
 
+            <div class="form-group">
+
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="visibility" id="visible" value="1" checked>
+                  <label class="form-check-label" for="visible">
+                      Visibile a tutti i visitatori
+                  </label>
+              </div>
+
+              <div class="form-check">
+                  <input class=" form-check-input" type="radio" name="visibility" id="invisible" value="0">
+                  <label class="form-check-label" for="invisible">
+                    Visibile ai soli iscritti
+                  </label>
+              </div>
+
+              @error('image')
+              <small class="text-danger">{{ $message }}</small>
+              @enderror
+            </div>
+
+
             {{-- <div class="form-group">
               <label for="tags">Tags</label> <br>
                 @foreach ($tags as $tag)

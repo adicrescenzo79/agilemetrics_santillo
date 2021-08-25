@@ -12,6 +12,7 @@ class Post extends Model
     'content',
     'slug',
     'cover',
+    'visibility',
   ];
 
   public function user()

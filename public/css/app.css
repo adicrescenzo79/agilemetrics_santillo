@@ -10046,3 +10046,7 @@ h3 {
   background-color: #903B3E;
   opacity: 0.5;
 }
+
+#main-guests-posts-index .img {
+  background-size: cover;
+}
