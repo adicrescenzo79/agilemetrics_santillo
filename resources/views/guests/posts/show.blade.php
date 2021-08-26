@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
+
+
 @section('content')
   <div id="main-guests-posts-show">
+
+    <div class="jumbo" :style="background"></div>
+
     <div class="container">
       <div class="row justify-content-center">
 
@@ -14,7 +19,7 @@
             </h4>
           @endif --}}
 
-          <img v-if="post.cover" class="cover" :src="post.cover" :alt="post.title">
+          {{-- <img v-if="post.cover" class="cover" :src="post.cover" :alt="post.title"> --}}
 
           {{-- <div class="col-md-4 img" :style="{ backgroundImage: 'url(' + post.cover + ')' }">
           </div> --}}

@@ -10049,4 +10049,20 @@ h3 {
 
 #main-guests-posts-index .img {
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#main-guests-posts-index .card-body {
+  max-height: 200px;
+}
+#main-guests-posts-index .card-body .card-text {
+  height: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#main-guests-posts-show .jumbo {
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

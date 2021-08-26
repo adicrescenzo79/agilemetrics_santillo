@@ -117,11 +117,19 @@ var app = new Vue({
         axios.get('/api/postsLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
+
+          _this.posts.forEach(function (post, i) {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
         });
       } else {
         axios.get('/api/postsNotLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
+
+          _this.posts.forEach(function (post, i) {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
         });
       }
     });

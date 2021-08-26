@@ -6,6 +6,7 @@ let app = new Vue({
     slug: '',
     api_token: '',
     post: [],
+    background: '',
   },
   mounted(){
     let stringSplitted = this.currentUrl.split('/');
@@ -21,7 +22,7 @@ let app = new Vue({
     }).then((response)=>{
       this.post = response.data.data;
       // console.log(response.data.data);
-      this.cover = 'background-image: url(' + this.post.cover + ')';
+      this.background = 'background-image: url(' + this.post.cover + ')';
 
     });
 

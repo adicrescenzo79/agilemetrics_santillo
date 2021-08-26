@@ -23,14 +23,22 @@ let app = new Vue({
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;
+        this.posts.forEach((post, i) => {
+          post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+        });
+
       });
     } else {
       axios.get('/api/postsNotLogged', {
       }).then((response)=>{
         // console.log(response.data.data);
         this.posts = response.data.data;
+        this.posts.forEach((post, i) => {
+          post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+        });
       });
     }
+
   });
 },
 methods:{

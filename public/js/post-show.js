@@ -100,7 +100,8 @@ var app = new Vue({
     currentUrl: window.location.href,
     slug: '',
     api_token: '',
-    post: []
+    post: [],
+    background: ''
   },
   mounted: function mounted() {
     var stringSplitted = this.currentUrl.split('/'); // console.log(stringSplitterd[4]);
@@ -115,7 +116,7 @@ var app = new Vue({
       axios.get("/api/posts/slug/".concat(this.slug), {}).then(function (response) {
         _this.post = response.data.data; // console.log(response.data.data);
 
-        _this.cover = 'background-image: url(' + _this.post.cover + ')';
+        _this.background = 'background-image: url(' + _this.post.cover + ')';
       });
     }
   }

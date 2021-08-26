@@ -10,7 +10,7 @@ class PostController extends Controller
 {
   public function notLogged()
   {
-      $posts = Post::where('visibility', '=', 1)->get();
+      $posts = Post::where('visibility', '=', 1)->orderBy('created_at', 'DESC')->get();
 
       return response()->json([
         'data' => $posts,
@@ -20,7 +20,7 @@ class PostController extends Controller
 
   public function logged()
   {
-      $posts = Post::all();
+      $posts = Post::orderBy('created_at', 'DESC')->get();
 
       return response()->json([
         'data' => $posts,
