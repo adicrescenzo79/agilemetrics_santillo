@@ -5,14 +5,19 @@
 @section('content')
   <div id="main-guests-posts-show">
 
-    <div class="jumbo" :style="background"></div>
+    <div v-if="post.cover" class="jumbo" :style="background">
+      <div class="container  d-flex justify-content-center align-items-end">
+        <h1 class="shadow-lg rounded p-3 text-capitalize">@{{post.title}}</h1>
+
+      </div>
+    </div>
 
     <div class="container">
       <div class="row justify-content-center">
 
         <div class="col-md-6">
 
-          <h1 class="text-capitalize">@{{post.title}}</h1>
+          <h1 v-if="!post.cover" class="shadow-lg rounded p-3 text-capitalize">@{{post.title}}</h1>
           {{-- @if ($post->category)
             <h4>Categoria:
               <a class="text-uppercase" href="{{ route('category.index', ['slug' => $post->category->slug])}}">{{$post->category->name}}</a>

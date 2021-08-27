@@ -1,0 +1,15 @@
+#main-admin-posts-index{
+  .img{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .card-body{
+    max-height: 200px;
+    .card-text{
+      height: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

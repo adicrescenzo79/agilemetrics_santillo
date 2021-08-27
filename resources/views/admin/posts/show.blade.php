@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container main-admin-post-show">
+  <div id="main-admin-post-show" class="container ">
     <div class="row justify-content-center">
 
         <div class="col-md-6">
@@ -33,11 +33,36 @@
                 <button class="btn btn-primary" type="button" name="button">Modifica</button>
               </a>
 
-              <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-primary" name="button">Cancella</button>
-              </form>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Cancella
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Sicuro di voler cancellare questo post?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary" name="button">Si</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 
 
             </a>

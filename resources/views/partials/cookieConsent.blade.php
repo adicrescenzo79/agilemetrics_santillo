@@ -8,6 +8,8 @@
 
 <script type="text/javascript">
 
+  // alert( document.cookie );
+
   var d = new Date(2050, 12, 31);
 
   $('.cookieButton').click(function(){

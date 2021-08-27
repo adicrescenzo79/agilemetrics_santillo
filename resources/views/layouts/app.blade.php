@@ -35,13 +35,13 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-  <div id="app">
+  <div id="app d-flex flex-column" class="h-100">
 
     @include('partials.header')
 
     @include('partials.cookieConsent')
 
-    <main class="py-4">
+    <main class="py-4 flex-shrink-0">
       @yield('content')
     </main>
 

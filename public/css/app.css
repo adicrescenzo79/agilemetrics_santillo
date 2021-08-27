@@ -10002,6 +10002,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
+body {
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10061,8 +10065,63 @@ h3 {
   text-overflow: ellipsis;
 }
 
+#main-guests-posts-show h1 {
+  color: #903B3E;
+  background-color: #fff;
+  font-weight: 800;
+  text-align: center;
+}
 #main-guests-posts-show .jumbo {
   height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  margin-top: -24px;
+}
+#main-guests-posts-show .jumbo .container {
+  height: 100%;
+}
+#main-guests-posts-show .container p {
+  text-align: justify;
+}
+
+#main-admin-posts-index .img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#main-admin-posts-index .card-body {
+  max-height: 200px;
+}
+#main-admin-posts-index .card-body .card-text {
+  height: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#main-admin-post-show h1 {
+  color: #903B3E;
+  background-color: #fff;
+  font-weight: 800;
+  text-align: center;
+}
+#main-admin-post-show .jumbo {
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-top: -24px;
+}
+#main-admin-post-show .jumbo .container {
+  height: 100%;
+}
+#main-admin-post-show.container img {
+  width: 100%;
+}
+#main-admin-post-show.container p {
+  text-align: justify;
+}
+
+footer {
+  background-color: #903B3E;
 }

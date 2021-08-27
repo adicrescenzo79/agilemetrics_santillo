@@ -1,4 +1,4 @@
-#main-guests-posts-show{
+#main-admin-post-show{
   h1{
     color: $bordeauxPrimary;
     // text-shadow: 2px 2px 4px #000000;
@@ -18,7 +18,10 @@
       height: 100%;
     }
   }
-  .container{
+  &.container{
+    img{
+      width: 100%;
+    }
     p{
       text-align: justify;
     }
