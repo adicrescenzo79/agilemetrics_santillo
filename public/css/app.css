@@ -10124,4 +10124,7 @@ body {
 
 footer {
   background-color: #903B3E;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }

@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
-
+        <li><a href="#">prova</a> </li>
       </ul>
 
       <!-- Right Side Of Navbar -->
@@ -44,15 +44,15 @@
               onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
               {{ __('Logout') }}
-            </a>
+              </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-            </form>
-          </div>
-        </li>
-      @endguest
-    </ul>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </div>
+          </li>
+        @endguest
+      </ul>
+    </div>
   </div>
-</div>
 </nav>
