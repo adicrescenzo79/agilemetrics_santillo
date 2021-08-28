@@ -5,6 +5,8 @@ let app = new Vue({
     api_token: '',
     posts: [],
     lastVisit: '',
+    cookieConsentVar: false,
+
   },
   mounted(){
     // axios.get('http://localhost:8000/api/user', {
@@ -17,33 +19,45 @@ let app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    let cookieConsent = getCookie('cookieConsent');
-    if (cookieConsent) {
+
+    this.cookieConsentVar = this.getCookie('cookieConsent');
+
+    console.log(this.cookieConsentVar);
+
+    if (this.cookieConsentVar) {
       this.dateCheck();
+
     }
 
     // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
 
-  axios.get('/usersapi',{
-  }).then((response)=>{
-    // console.log(response.data.success);
-    if (response.data.success) {
-      axios.get('/api/postsLogged', {
-      }).then((response)=>{
-        // console.log(response.data.data);
-        this.posts = response.data.data;
-      });
-    } else {
-      axios.get('/api/postsNotLogged', {
-      }).then((response)=>{
-        // console.log(response.data.data);
-        this.posts = response.data.data;
-      });
-    }
-  });
-},
-methods:{
+    axios.get('/usersapi',{
+    }).then((response)=>{
+      // console.log(response.data.success);
+      if (response.data.success) {
+        axios.get('/api/postsLogged', {
+        }).then((response)=>{
+          // console.log(response.data.data);
+          this.posts = response.data.data;
+        });
+      } else {
+        axios.get('/api/postsNotLogged', {
+        }).then((response)=>{
+          // console.log(response.data.data);
+          this.posts = response.data.data;
+        });
+      }
+    });
+  },
+  methods:{
+
+  cookieConsentFun: function(){
+    document.cookie = "cookieConsent=true;";
+    this.cookieConsentVar = this.getCookie('cookieConsent');
+    console.log(this.cookieConsentVar);
+  },
+
   getCookie: function(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -52,14 +66,14 @@ methods:{
 
   dateCheck: function(){
     let cookieLastVisit = this.getCookie('cookieLastVisit');
-    // console.log('ultima visita ' + cookieLastVisit);
+    console.log('ultima visita ' + cookieLastVisit);
     let cookieControl = this.getCookie('cookieControl');
-    // console.log('controllo ' + cookieControl);
+    console.log('controllo ' + cookieControl);
 
     // dayjs.extend(LocalizedFormat)
     let now = new Date();
     now = dayjs(now).format('MMMM D, YYYY');
-    // console.log('oggi ' + now);
+    console.log('oggi ' + now);
     // let nowFormat = dayjs(now).format('MM/DD/YYYY');
     // console.log(nowFormat);
     // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
@@ -72,9 +86,9 @@ methods:{
 
 
     if (now === cookieControl) {
-      // console.log('non cambio');
+      console.log('non cambio');
     } else {
-      // console.log('cambio');
+      console.log('cambio');
       document.cookie = "cookieControl="+now;
       document.cookie = "cookieLastVisit="+now;
     }

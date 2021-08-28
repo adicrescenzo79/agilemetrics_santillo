@@ -99,7 +99,8 @@ var app = new Vue({
   data: {
     api_token: '',
     posts: [],
-    lastVisit: ''
+    lastVisit: '',
+    cookieConsentVar: false
   },
   mounted: function mounted() {
     var _this = this;
@@ -114,9 +115,10 @@ var app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    var cookieConsent = getCookie('cookieConsent');
+    this.cookieConsentVar = this.getCookie('cookieConsent');
+    console.log(this.cookieConsentVar);
 
-    if (cookieConsent) {
+    if (this.cookieConsentVar) {
       this.dateCheck();
     } // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
@@ -138,20 +140,25 @@ var app = new Vue({
     });
   },
   methods: {
+    cookieConsentFun: function cookieConsentFun() {
+      document.cookie = "cookieConsent=true;";
+      this.cookieConsentVar = this.getCookie('cookieConsent');
+      console.log(this.cookieConsentVar);
+    },
     getCookie: function getCookie(name) {
       var value = "; ".concat(document.cookie);
       var parts = value.split("; ".concat(name, "="));
       if (parts.length === 2) return parts.pop().split(';').shift();
     },
     dateCheck: function dateCheck() {
-      var cookieLastVisit = this.getCookie('cookieLastVisit'); // console.log('ultima visita ' + cookieLastVisit);
-
-      var cookieControl = this.getCookie('cookieControl'); // console.log('controllo ' + cookieControl);
-      // dayjs.extend(LocalizedFormat)
+      var cookieLastVisit = this.getCookie('cookieLastVisit');
+      console.log('ultima visita ' + cookieLastVisit);
+      var cookieControl = this.getCookie('cookieControl');
+      console.log('controllo ' + cookieControl); // dayjs.extend(LocalizedFormat)
 
       var now = new Date();
-      now = dayjs(now).format('MMMM D, YYYY'); // console.log('oggi ' + now);
-      // let nowFormat = dayjs(now).format('MM/DD/YYYY');
+      now = dayjs(now).format('MMMM D, YYYY');
+      console.log('oggi ' + now); // let nowFormat = dayjs(now).format('MM/DD/YYYY');
       // console.log(nowFormat);
       // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
       // console.log(cookieLastVisitFormat);
@@ -159,9 +166,10 @@ var app = new Vue({
       // console.log(cookieLastVisitNewFormat);
       // console.log(cookieLastVisitFormat);
 
-      if (now === cookieControl) {// console.log('non cambio');
+      if (now === cookieControl) {
+        console.log('non cambio');
       } else {
-        // console.log('cambio');
+        console.log('cambio');
         document.cookie = "cookieControl=" + now;
         document.cookie = "cookieLastVisit=" + now;
       }

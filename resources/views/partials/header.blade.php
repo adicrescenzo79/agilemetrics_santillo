@@ -1,4 +1,4 @@
-<nav class="navbar bg-bordeaux navbar-expand-md navbar-light shadow-sm">
+<nav class="text-capitalize navbar bg-bordeaux navbar-expand-md navbar-light shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       {{ config('app.name', 'Laravel') }}
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
-        <li><a href="#">prova nuovo link</a> </li>
+        <li><a class="nav-link" href="#">prova nuovo link</a> </li>
       </ul>
 
       <!-- Right Side Of Navbar -->

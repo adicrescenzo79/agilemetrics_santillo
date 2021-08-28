@@ -17,7 +17,7 @@
 
         <div class="col-md-6 col-xl-3">
           <div class="card mt-3">
-            <div class="card-header">
+            <div class="card-header" >
 
               <a class="mr-5 text-capitalize" href="{{route('admin.posts.show', ['post' => $post->id])}}">
                 {{ $post->title }}
@@ -29,22 +29,27 @@
 
                 {{$post->content}}
               </div>
-              <div class="row justify-content-center flex-wrap mt-5">
+              <div class="row justify-content-center align-items-end flex-wrap mt-5">
+
+
                 <a class="mr-5" href="{{route('admin.posts.edit', ['post' => $post->id])}}">
                   <button class="btn btn-primary" type="button" name="button">Modifica</button>
                 </a>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  Cancella
-                </button>
+                <a href="#">
+
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Cancella
+                  </button>
+                </a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Cancellazione post</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

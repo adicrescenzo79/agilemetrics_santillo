@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container main-admin-post-edit">
+  <div id="main-admin-posts-edit" class="container ">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <h3>Modifica Post</h3>
@@ -97,6 +97,8 @@
                   @enderror
                 @endforeach
             </div> --}}
+            <a class="inline-block btn btn-primary" href="{{route('admin.posts.index')}}">Annulla</a>
+
 
             <button type="submit" class="btn btn-primary" name="button">Salva</button>
 
