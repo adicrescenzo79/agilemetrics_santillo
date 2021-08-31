@@ -7,7 +7,7 @@
 
       <div class="card cookies d-flex flex-column justify-content-center align-items-center pt-3 pb-3">
         <p class="text-center p-2">Questo sito utilizza i cookies per offrire un'esperienza migliore all'utente. </p>
-        <button @click="cookieConsentFun()" class="cookieButton btn btn-primary ml-3" type="button" name="button">Consenti i cookies</button>
+        <button @click="cookieConsentFun()" class="cookieButton btn btn-primary-pers ml-3" type="button" name="button">Consenti i cookies</button>
       </div>
     </div>
 

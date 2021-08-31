@@ -1,4 +1,4 @@
-<nav class="text-capitalize navbar bg-bordeaux navbar-expand-md navbar-light shadow-sm">
+<nav class="text-capitalize navbar bg-primary-pers navbar-expand-md navbar-light shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       {{ config('app.name', 'Laravel') }}
@@ -36,7 +36,7 @@
 
             </a>
 
-            <div class="dropdown-menu dropdown-menu-right bg-bordeaux" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-right bg-primary-pers" aria-labelledby="navbarDropdown">
               @if (Auth::user()->email == "luca.santillo@gmail.com")
                 <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Contenuti</a>
               @endif

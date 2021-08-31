@@ -25,16 +25,16 @@
 
           <div class="row justify-content-center">
             <a href="{{route('admin.posts.index')}}">
-              <button class="btn btn-primary mr-5" type="button" name="button">
+              <button class="btn btn-primary-pers mr-5" type="button" name="button">
                 Torna all'indice
               </button>
 
               <a class="mr-5" href="{{route('admin.posts.edit', ['post' => $post->id])}}">
-                <button class="btn btn-primary" type="button" name="button">Modifica</button>
+                <button class="btn btn-primary-pers" type="button" name="button">Modifica</button>
               </a>
 
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              <button type="button" class="btn btn-primary-pers" data-toggle="modal" data-target="#exampleModal">
                 Cancella
               </button>
 
@@ -56,7 +56,7 @@
                       <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary" name="button">Si</button>
+                        <button type="submit" class="btn btn-primary-pers" name="button">Si</button>
                       </form>
                     </div>
                   </div>

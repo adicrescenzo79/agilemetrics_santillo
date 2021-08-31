@@ -10012,21 +10012,26 @@ body {
   box-sizing: border-box;
 }
 
-.bg-bordeaux {
+.bg-primary-pers {
   background-color: #903B3E;
 }
 
-.txt-white {
+.txt-light {
   color: #fff;
 }
 
-.btn-primary {
+.btn-primary-pers {
   background-color: #903B3E;
   border-color: #752f31;
+  color: #fff;
 }
-.btn-primary:hover, .btn-primary:focus {
-  background-color: #752f31;
-  border-color: #752f31;
+.btn-primary-pers:hover, .btn-primary-pers:focus, .btn-primary-pers:active {
+  background-color: #752f31 !important;
+  border-color: #752f31 !important;
+  color: #fff;
+}
+.btn-primary-pers:focus {
+  box-shadow: 0 0 0 0.2rem rgba(117, 47, 49, 0.25);
 }
 
 nav.navbar-light {

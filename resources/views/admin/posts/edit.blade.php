@@ -97,10 +97,10 @@
                   @enderror
                 @endforeach
             </div> --}}
-            <a class="inline-block btn btn-primary" href="{{route('admin.posts.index')}}">Annulla</a>
+            <a class="inline-block btn btn-primary-pers" href="{{route('admin.posts.index')}}">Annulla</a>
 
 
-            <button type="submit" class="btn btn-primary" name="button">Salva</button>
+            <button type="submit" class="btn btn-primary-pers" name="button">Salva</button>
 
           </form>
         </div>

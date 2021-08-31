@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <a href="{{route('admin.posts.create')}}">
-          <button class="btn btn-primary" type="button" name="button">
+          <button class="btn btn-primary-pers" type="button" name="button">
             Scrivi un nuovo post
           </button>
 
@@ -33,20 +33,20 @@
 
 
                 <a class="mr-5" href="{{route('admin.posts.edit', ['post' => $post->id])}}">
-                  <button class="btn btn-primary" type="button" name="button">Modifica</button>
+                  <button class="btn btn-primary-pers" type="button" name="button">Modifica</button>
                 </a>
 
                 <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="btn btn-primary" name="button">Cancella</button>
+                  <button type="submit" class="btn btn-primary-pers" name="button">Cancella</button>
                 </form>
 
 
                 <!-- Button trigger modal -->
                 {{-- <a href="#">
 
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  <button type="button" class="btn btn-primary-pers" data-toggle="modal" data-target="#exampleModal">
                     Cancella
                   </button>
                 </a> --}}
@@ -69,7 +69,7 @@
                         <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-primary" name="button">Si</button>
+                          <button type="submit" class="btn btn-primary-pers" name="button">Si</button>
                         </form>
                       </div>
                     </div>

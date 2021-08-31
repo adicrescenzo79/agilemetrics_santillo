@@ -94,7 +94,7 @@
 
 
 
-            <button type="submit" class="btn btn-primary" name="button">Salva</button>
+            <button type="submit" class="btn btn-primary-pers" name="button">Salva</button>
 
           </form>
         </div>

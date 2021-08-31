@@ -42,12 +42,12 @@
 
           <div class="row justify-content-center">
             <a href="{{route('posts.index')}}">
-              <button class="btn btn-primary mr-5" type="button" name="button">
+              <button class="btn btn-primary-pers mr-5" type="button" name="button">
                 Torna all'indice dei post
               </button>
             </a>
             <a href="{{route('welcome')}}">
-              <button class="btn btn-primary mr-5" type="button" name="button">
+              <button class="btn btn-primary-pers mr-5" type="button" name="button">
                 Torna all'home page
               </button>
             </a>

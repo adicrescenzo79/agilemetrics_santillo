@@ -1,20 +1,25 @@
 //Colors
-.bg-bordeaux{
-  background-color: $bordeauxPrimary;
+.bg-primary-pers{
+  background-color: $primaryColor;
 }
 
-.txt-white{
-  color: #fff;
+.txt-light{
+  color: $txtColorLight;
 }
 
 //buttons
-.btn-primary{
-  background-color: $bordeauxPrimary;
-  border-color: #752f31;
+.btn-primary-pers{
+  background-color: $primaryColor;
+  border-color: $primaryColorDark;
+  color: $txtColorLight;
   &:hover,
+  &:focus,
+  &:active{
+    background-color: $primaryColorDark !important;
+    border-color: $primaryColorDark !important;
+    color: $txtColorLight;
+  }
   &:focus{
-    background-color: #752f31;
-    border-color: #752f31;
-
+    box-shadow: 0 0 0 0.2rem rgb(117 47 49 / 25%);
   }
 }
