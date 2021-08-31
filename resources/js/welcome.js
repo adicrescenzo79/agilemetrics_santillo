@@ -19,8 +19,15 @@ let app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
+    let inOneYear = dayjs().add(1, 'year').$d;
+
+    // console.log(inOneYear);
+
+
 
     this.cookieConsentVar = this.getCookie('cookieConsent');
+    // this.cookieConsentVar = false;
+
 
     console.log(this.cookieConsentVar);
 
@@ -28,9 +35,9 @@ let app = new Vue({
       this.dateCheck();
 
     }
-
-    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
-    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+    // document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
 
     axios.get('/usersapi',{
     }).then((response)=>{
@@ -52,47 +59,52 @@ let app = new Vue({
   },
   methods:{
 
-  cookieConsentFun: function(){
-    document.cookie = "cookieConsent=true;";
-    this.cookieConsentVar = this.getCookie('cookieConsent');
-    console.log(this.cookieConsentVar);
+    cookieConsentFun: function(){
+      let inOneYear = dayjs().add(1, 'year').$d;
+
+      document.cookie = "cookieConsent=true; expires="+inOneYear+"; path=/";
+      this.cookieConsentVar = this.getCookie('cookieConsent');
+      console.log(this.cookieConsentVar);
+      this.dateCheck();
+    },
+
+    getCookie: function(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    },
+
+    dateCheck: function(){
+      let cookieLastVisit = this.getCookie('cookieLastVisit');
+      console.log('ultima visita ' + cookieLastVisit);
+      let cookieControl = this.getCookie('cookieControl');
+      console.log('controllo ' + cookieControl);
+
+      // dayjs.extend(LocalizedFormat)
+      let now = new Date();
+      now = dayjs(now).format('MMMM D, YYYY');
+      console.log('oggi ' + now);
+      // let nowFormat = dayjs(now).format('MM/DD/YYYY');
+      // console.log(nowFormat);
+      // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
+      // console.log(cookieLastVisitFormat);
+      // let cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
+      // console.log(cookieLastVisitNewFormat);
+
+
+      // console.log(cookieLastVisitFormat);
+
+
+      if (now === cookieControl) {
+        console.log('non cambio');
+      } else {
+        console.log('cambio');
+        let inOneYear = dayjs().add(1, 'year').$d;
+        document.cookie = "cookieControl="+now+"; expires="+inOneYear+"; path=/";
+        // document.cookie = 'cookieControl=${now};expires=${inOneYear};'
+        document.cookie = "cookieLastVisit="+now+"; expires="+inOneYear+"; path=/";
+      }
+
+    },
   },
-
-  getCookie: function(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  },
-
-  dateCheck: function(){
-    let cookieLastVisit = this.getCookie('cookieLastVisit');
-    console.log('ultima visita ' + cookieLastVisit);
-    let cookieControl = this.getCookie('cookieControl');
-    console.log('controllo ' + cookieControl);
-
-    // dayjs.extend(LocalizedFormat)
-    let now = new Date();
-    now = dayjs(now).format('MMMM D, YYYY');
-    console.log('oggi ' + now);
-    // let nowFormat = dayjs(now).format('MM/DD/YYYY');
-    // console.log(nowFormat);
-    // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
-    // console.log(cookieLastVisitFormat);
-    // let cookieLastVisitNewFormat = dayjs(cookieLastVisitNew).format('MM/DD/YYYY');
-    // console.log(cookieLastVisitNewFormat);
-
-
-    // console.log(cookieLastVisitFormat);
-
-
-    if (now === cookieControl) {
-      console.log('non cambio');
-    } else {
-      console.log('cambio');
-      document.cookie = "cookieControl="+now;
-      document.cookie = "cookieLastVisit="+now;
-    }
-
-  },
-},
 })

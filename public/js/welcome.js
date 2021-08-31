@@ -115,13 +115,17 @@ var app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
-    this.cookieConsentVar = this.getCookie('cookieConsent');
+    var inOneYear = dayjs().add(1, 'year').$d; // console.log(inOneYear);
+
+    this.cookieConsentVar = this.getCookie('cookieConsent'); // this.cookieConsentVar = false;
+
     console.log(this.cookieConsentVar);
 
     if (this.cookieConsentVar) {
       this.dateCheck();
-    } // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
-    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+    } // document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
 
 
     axios.get('/usersapi', {}).then(function (response) {
@@ -141,9 +145,11 @@ var app = new Vue({
   },
   methods: {
     cookieConsentFun: function cookieConsentFun() {
-      document.cookie = "cookieConsent=true;";
+      var inOneYear = dayjs().add(1, 'year').$d;
+      document.cookie = "cookieConsent=true; expires=" + inOneYear + "; path=/";
       this.cookieConsentVar = this.getCookie('cookieConsent');
       console.log(this.cookieConsentVar);
+      this.dateCheck();
     },
     getCookie: function getCookie(name) {
       var value = "; ".concat(document.cookie);
@@ -170,8 +176,10 @@ var app = new Vue({
         console.log('non cambio');
       } else {
         console.log('cambio');
-        document.cookie = "cookieControl=" + now;
-        document.cookie = "cookieLastVisit=" + now;
+        var inOneYear = dayjs().add(1, 'year').$d;
+        document.cookie = "cookieControl=" + now + "; expires=" + inOneYear + "; path=/"; // document.cookie = 'cookieControl=${now};expires=${inOneYear};'
+
+        document.cookie = "cookieLastVisit=" + now + "; expires=" + inOneYear + "; path=/";
       }
     }
   }
