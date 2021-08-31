@@ -36,16 +36,23 @@
                   <button class="btn btn-primary" type="button" name="button">Modifica</button>
                 </a>
 
+                <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-primary" name="button">Cancella</button>
+                </form>
+
+
                 <!-- Button trigger modal -->
-                <a href="#">
+                {{-- <a href="#">
 
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Cancella
                   </button>
-                </a>
+                </a> --}}
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -67,7 +74,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> --}}
 
 
               </div>

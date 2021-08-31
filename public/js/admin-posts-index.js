@@ -96,9 +96,16 @@
 Vue.config.devtools = true;
 var app = new Vue({
   el: '#main-admin-posts-index',
-  data: {},
+  data: {
+    warning: false
+  },
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    warningToggle: function warningToggle() {
+      this.warning = !this.warning;
+      console.log(this.warning);
+    }
+  }
 });
 
 /***/ }),
