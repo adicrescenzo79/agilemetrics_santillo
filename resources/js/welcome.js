@@ -19,6 +19,7 @@ let app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
+
     let inOneYear = dayjs().add(1, 'year').$d;
 
     // console.log(inOneYear);

@@ -3,10 +3,10 @@
 @section('content')
   <div id="main-welcome">
 
-    <div v-if="!cookieConsentVar" id="cookies" class="container">
+    <div v-if="!cookieConsentVar" id="cookies" class="position-absolute d-flex justify-content-center align-items-center">
 
-      <div class="cookies d-flex justify-content-center align-items-baseline pt-3 pb-3">
-        <p>Questo sito utilizza i cookies per offrire un'esperienza migliore all'utente. </p>
+      <div class="card cookies d-flex flex-column justify-content-center align-items-center pt-3 pb-3">
+        <p class="text-center p-2">Questo sito utilizza i cookies per offrire un'esperienza migliore all'utente. </p>
         <button @click="cookieConsentFun()" class="cookieButton btn btn-primary ml-3" type="button" name="button">Consenti i cookies</button>
       </div>
     </div>
@@ -14,7 +14,7 @@
 
     <div class="container">
       <div class="row justify-content-center">
-        <h1>BENVENUTI IN AGILE METRICS</h1>
+        <h1 class="text-center">BENVENUTI IN AGILE METRICS</h1>
 
       </div>
     </div>
