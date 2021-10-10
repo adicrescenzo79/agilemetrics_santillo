@@ -146,7 +146,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Utente\Documents\projects\agilemetrics_santillo\resources\js\posts-index.js */"./resources/js/posts-index.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\posts-index.js */"./resources/js/posts-index.js");
 
 
 /***/ })

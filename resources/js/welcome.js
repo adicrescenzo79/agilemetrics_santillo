@@ -6,9 +6,15 @@ let app = new Vue({
     posts: [],
     lastVisit: '',
     cookieConsentVar: false,
+    cookieMsg: false
 
   },
   mounted(){
+    this.cookieConsentVar = this.getCookie('cookieConsent');
+    if (!this.cookieConsentVar) {
+      this.cookieMsg = true;
+    }
+
     // axios.get('http://localhost:8000/api/user', {
     // }).then((response)=>{
     // // handle success
@@ -30,15 +36,15 @@ let app = new Vue({
     // this.cookieConsentVar = false;
 
 
-    console.log(this.cookieConsentVar);
+    console.log('riga 33 '+this.cookieConsentVar);
 
     if (this.cookieConsentVar) {
       this.dateCheck();
 
     }
-    // document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
-    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
 
     axios.get('/usersapi',{
     }).then((response)=>{
@@ -65,8 +71,9 @@ let app = new Vue({
 
       document.cookie = "cookieConsent=true; expires="+inOneYear+"; path=/";
       this.cookieConsentVar = this.getCookie('cookieConsent');
-      console.log(this.cookieConsentVar);
+      console.log('riga 68'+this.cookieConsentVar);
       this.dateCheck();
+      //this.cookieMsg = true;
     },
 
     getCookie: function(name) {

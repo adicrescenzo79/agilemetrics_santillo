@@ -10058,11 +10058,6 @@ nav.navbar.scrolled {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-nav.navbar.navbar-light {
-  z-index: 100;
-  position: fixed;
-  width: 100%;
-}
 nav.navbar.navbar-light .navbar-brand {
   color: #20292f;
   font-size: 1.64rem;
@@ -10092,8 +10087,24 @@ nav.navbar.navbar-light .dropdown-item:focus {
   opacity: 0.5;
 }
 
+header {
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+}
+header .progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+}
+header .progress-bar {
+  height: 8px;
+  background: #f25b3a;
+  width: 0%;
+}
+
 main {
-  padding: 6.5rem 0;
+  padding: 10rem 0;
   height: 200vh;
 }
 
@@ -10210,6 +10221,9 @@ body.offline .fixed-offline > * {
 }
 body.offline h1 span {
   color: #f25b3a;
+  font-weight: 900;
+}
+body.offline h2 {
   font-weight: 900;
 }
 

@@ -81,57 +81,40 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/post-show.js":
-/*!***********************************!*\
-  !*** ./resources/js/post-show.js ***!
-  \***********************************/
+/***/ "./resources/js/layout.js":
+/*!********************************!*\
+  !*** ./resources/js/layout.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-Vue.config.devtools = true;
-var app = new Vue({
-  el: '#main-guests-posts-show',
-  data: {
-    currentUrl: window.location.href,
-    slug: '',
-    api_token: '',
-    post: [],
-    background: ''
-  },
-  mounted: function mounted() {
-    var stringSplitted = this.currentUrl.split('/'); // console.log(stringSplitterd[4]);
+window.onscroll = function () {
+  myFunction();
+};
 
-    this.slug = stringSplitted[4];
-    this.postBySlug();
-  },
-  methods: {
-    postBySlug: function postBySlug() {
-      var _this = this;
-
-      axios.get("/api/posts/slug/".concat(this.slug), {}).then(function (response) {
-        _this.post = response.data.data; // console.log(response.data.data);
-
-        _this.background = 'background-image: url(' + _this.post.cover + ')';
-      });
-    }
-  }
-});
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = winScroll / height * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+  console.log('ciao');
+}
 
 /***/ }),
 
-/***/ 2:
-/*!*****************************************!*\
-  !*** multi ./resources/js/post-show.js ***!
-  \*****************************************/
+/***/ 5:
+/*!**************************************!*\
+  !*** multi ./resources/js/layout.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\post-show.js */"./resources/js/post-show.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\layout.js */"./resources/js/layout.js");
 
 
 /***/ })

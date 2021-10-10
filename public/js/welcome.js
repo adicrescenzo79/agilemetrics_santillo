@@ -100,12 +100,17 @@ var app = new Vue({
     api_token: '',
     posts: [],
     lastVisit: '',
-    cookieConsentVar: false
+    cookieConsentVar: false,
+    cookieMsg: false
   },
   mounted: function mounted() {
     var _this = this;
 
-    // axios.get('http://localhost:8000/api/user', {
+    this.cookieConsentVar = this.getCookie('cookieConsent');
+
+    if (!this.cookieConsentVar) {
+      this.cookieMsg = true;
+    } // axios.get('http://localhost:8000/api/user', {
     // }).then((response)=>{
     // // handle success
     //   console.log(response);
@@ -115,17 +120,19 @@ var app = new Vue({
     // });
     // let cookieSplitted = document.cookie.split(';');
     // let visita = cookieSplitted[cookieSplitted.indexOf('lastVisit')];
+
+
     var inOneYear = dayjs().add(1, 'year').$d; // console.log(inOneYear);
 
     this.cookieConsentVar = this.getCookie('cookieConsent'); // this.cookieConsentVar = false;
 
-    console.log(this.cookieConsentVar);
+    console.log('riga 33 ' + this.cookieConsentVar);
 
     if (this.cookieConsentVar) {
       this.dateCheck();
-    } // document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    // document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
-    // document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    } //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
 
 
     axios.get('/usersapi', {}).then(function (response) {
@@ -148,8 +155,8 @@ var app = new Vue({
       var inOneYear = dayjs().add(1, 'year').$d;
       document.cookie = "cookieConsent=true; expires=" + inOneYear + "; path=/";
       this.cookieConsentVar = this.getCookie('cookieConsent');
-      console.log(this.cookieConsentVar);
-      this.dateCheck();
+      console.log('riga 68' + this.cookieConsentVar);
+      this.dateCheck(); //this.cookieMsg = true;
     },
     getCookie: function getCookie(name) {
       var value = "; ".concat(document.cookie);

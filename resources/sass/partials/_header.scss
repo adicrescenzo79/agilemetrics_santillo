@@ -1,1 +1,18 @@
-@import '_navbar.scss';
+@import "_navbar.scss";
+
+header {
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    .progress-container {
+        width: 100%;
+        height: 8px;
+        background: #ccc;
+    }
+
+    .progress-bar {
+        height: 8px;
+        background: $primaryColor;
+        width: 0%;
+    }
+}

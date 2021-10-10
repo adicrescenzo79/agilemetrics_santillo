@@ -1,6 +1,7 @@
+<header>
 <nav class="text-capitalize navbar navbar-expand-md navbar-light shadow-sm filter">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand" href="{{ url('/welcome') }}">
       {{ config('app.name', 'Laravel') }}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -52,5 +53,6 @@
 </nav>
 
 
+</header>
 <script>
 </script>

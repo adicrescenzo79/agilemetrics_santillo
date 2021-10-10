@@ -13,10 +13,6 @@ nav.navbar{
   }
 
   &.navbar-light{
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-  
     .navbar-brand{
       color: #20292f;
       font-size: 1.64rem;
@@ -50,7 +46,7 @@ nav.navbar{
       &:focus{
         opacity: 0.5;
       }
-  }
+    }
   
   }
 }

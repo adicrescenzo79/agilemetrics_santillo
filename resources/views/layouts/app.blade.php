@@ -69,6 +69,7 @@
     @include('partials.header')
 
 
+
     <main class="flex-shrink-0">
       @yield('content')
     </main>
@@ -79,10 +80,8 @@
     @yield('foot-script')
 
   </div>
+  <script src="{{asset('js/layout.js')}}" charset="utf-8"></script>
 </body>
 
-<script>
-  console.log('ciao');
-</script>
 
 </html>
