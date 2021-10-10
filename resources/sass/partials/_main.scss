@@ -1,5 +1,6 @@
 main{
-  padding: 4.5rem 0;
+  padding: 6.5rem 0;
+  height: 200vh;
 }
 
 @import '_main-guests-posts-index.scss';
@@ -8,3 +9,4 @@ main{
 @import '_main-admin-posts-show.scss';
 @import '_main-admin-posts-edit.scss';
 @import '_main-welcome.scss';
+@import '_main-offline.scss';

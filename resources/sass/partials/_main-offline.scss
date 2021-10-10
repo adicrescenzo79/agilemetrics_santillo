@@ -1,0 +1,30 @@
+body.offline{
+  background-image: url('../img/scott-graham-5fNmWej4tAA-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  .filter{
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.5); 
+  }
+  .fixed-offline{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &>*{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  h1{
+    span{
+      color: $primaryColor;
+      font-weight: 900;
+    }
+  }
+}

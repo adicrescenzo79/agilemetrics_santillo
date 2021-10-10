@@ -62,11 +62,11 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
-  <div id="app d-flex flex-column" class="h-100">
-
-
-    @include('partials.header')
+<body class="offline" >
+  <div id="app d-flex flex-column" class="">
+    
+    
+    @include('partials.offlineheader')
 
 
     <main class="flex-shrink-0">
@@ -74,7 +74,7 @@
     </main>
 
 
-    @include('partials.footer')
+    <!-- @include('partials.footer') -->
 
     @yield('foot-script')
 

@@ -1,6 +1,7 @@
 //Colors
 .bg-primary-pers{
-  background-color: $primaryColor;
+  background-color: $backGround;
+
 }
 
 .txt-light{
@@ -10,13 +11,17 @@
 //buttons
 .btn-primary-pers{
   background-color: $primaryColor;
-  border-color: $primaryColorDark;
+  //border-color: $primaryColorDark;
   color: $txtColorLight;
+  border: none;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
   &:hover,
   &:focus,
   &:active{
     background-color: $primaryColorDark !important;
-    border-color: $primaryColorDark !important;
+    //border-color: $primaryColorDark !important;
     color: $txtColorLight;
   }
   &:focus{

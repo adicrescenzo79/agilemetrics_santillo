@@ -1,8 +1,8 @@
 {
     "/js/admin-posts-index.js": "/js/admin-posts-index.js",
     "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
     "/js/post-show.js": "/js/post-show.js",
     "/js/posts-index.js": "/js/posts-index.js",
-    "/js/welcome.js": "/js/welcome.js",
-    "/css/app.css": "/css/app.css"
+    "/js/welcome.js": "/js/welcome.js"
 }

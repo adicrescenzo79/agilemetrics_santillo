@@ -37343,7 +37343,11 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // $("main").scrollTop(100);
+// console.log($("main").scrollTop());
+// $("main").scroll(function () {
+//     console.log($("main").scrollTop());
+// })
 
 /***/ }),
 

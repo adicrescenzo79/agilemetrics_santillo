@@ -3,6 +3,7 @@
 @section('content')
   <div id="main-welcome">
 
+    {{-- AUTORIZZAZIONE COOKIES --}}
     <div v-if="!cookieConsentVar" id="cookies" class="position-absolute d-flex justify-content-center align-items-center">
 
       <div class="card cookies d-flex flex-column justify-content-center align-items-center pt-3 pb-3">
@@ -11,12 +12,18 @@
       </div>
     </div>
 
-
+    {{-- MAIN --}}
     <div class="container">
       <div class="row justify-content-center">
         <h1 class="text-center">BENVENUTI IN AGILE METRICS</h1>
 
       </div>
+    </div>
+
+    {{-- ULTIMI POST --}}
+
+    <div class="">
+
     </div>
   </div>
 @endsection

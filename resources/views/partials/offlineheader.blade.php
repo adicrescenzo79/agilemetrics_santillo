@@ -1,4 +1,4 @@
-<nav class="text-capitalize navbar bg-primary-pers navbar-expand-md navbar-light shadow-sm">
+<nav class="text-capitalize navbar navbar-expand-md navbar-light shadow-sm filter">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">
       {{ config('app.name', 'Laravel') }}
@@ -9,33 +9,20 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left Side Of Navbar -->
-      <ul class="navbar-nav mr-auto">
-        <li><a class="nav-link" href="#">prova nuovo link</a> </li>
-      </ul>
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
         <!-- Authentication Links -->
-        <li class="nav-item">
-          <a class="nav-link {{ Request::routeIs('posts.*') ? 'active' : '' }}" href="{{route('posts.index')}}">Posts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link 
-          {{ Request::routeIs('welcome') ? 'active' : '' }}" href="{{ url('/') }}">
-            Home
-          </a>
-        </li>
 
         @guest
         <li class="nav-item">
           <a class="nav-link {{ Request::routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">Area Iscritti</a>
         </li>
-        @if (Route::has('register'))
+        <!-- @if (Route::has('register'))
         <li class="nav-item">
           <a class="nav-link {{ Request::routeIs('register') ? 'active' : '' }}" href="{{ route('register') }}">Iscriviti</a>
         </li>
-        @endif
+        @endif -->
         @else
         <li class="nav-item dropdown ">
           <a id="navbarDropdown" class="text-capitalize nav-link dropdown-toggle {{ Request::routeIs('admin.*') ? 'active' : '' }}" href="#" role="button"
@@ -64,6 +51,6 @@
   </div>
 </nav>
 
+
 <script>
-  console.log('ciao');
 </script>

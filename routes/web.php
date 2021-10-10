@@ -15,9 +15,16 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');;
+  return view('offline');
+})->name('offline');
+
+
+
 
 Route::prefix('my')->group(function(){
 

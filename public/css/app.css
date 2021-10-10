@@ -32,7 +32,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Inconsolata", monospace;
+  --font-family-sans-serif: "Open Sans", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -55,7 +55,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Inconsolata", monospace;
+  font-family: "Open Sans", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -5584,7 +5584,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Inconsolata", monospace;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -5686,7 +5686,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Inconsolata", monospace;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -10002,8 +10002,13 @@ h3 {
     border-color: #dee2e6;
   }
 }
+html {
+  font-size: 14px;
+}
+
 body {
   height: 100%;
+  font-size: 1rem;
 }
 
 * {
@@ -10012,8 +10017,13 @@ body {
   box-sizing: border-box;
 }
 
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
 .bg-primary-pers {
-  background-color: #903B3E;
+  background-color: #fff;
 }
 
 .txt-light {
@@ -10021,48 +10031,70 @@ body {
 }
 
 .btn-primary-pers {
-  background-color: #903B3E;
-  border-color: #752f31;
+  background-color: #f25b3a;
   color: #fff;
+  border: none;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 .btn-primary-pers:hover, .btn-primary-pers:focus, .btn-primary-pers:active {
-  background-color: #752f31 !important;
-  border-color: #752f31 !important;
+  background-color: #bd4a31 !important;
   color: #fff;
 }
 .btn-primary-pers:focus {
   box-shadow: 0 0 0 0.2rem rgba(117, 47, 49, 0.25);
 }
 
-nav.navbar-light {
+nav.navbar {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.07rem;
+  box-shadow: 0 0 30px rgba(7, 51, 84, 0.17) !important;
+  transition: 0.2s;
+}
+nav.navbar.scrolled {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+nav.navbar.navbar-light {
   z-index: 100;
   position: fixed;
   width: 100%;
 }
-nav.navbar-light .navbar-brand {
-  color: #fff;
+nav.navbar.navbar-light .navbar-brand {
+  color: #20292f;
+  font-size: 1.64rem;
+  font-weight: 600;
 }
-nav.navbar-light .navbar-brand:hover, nav.navbar-light .navbar-brand:focus {
-  color: #fff;
-  opacity: 0.5 !important;
+nav.navbar.navbar-light .navbar-nav .nav-link {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  color: #20292f;
 }
-nav.navbar-light .navbar-nav .nav-link {
-  color: #fff;
+nav.navbar.navbar-light .navbar-nav .nav-link.active {
+  font-weight: 600;
 }
-nav.navbar-light .navbar-nav .nav-link:hover, nav.navbar-light .navbar-nav .nav-link:focus {
-  color: #fff;
+nav.navbar.navbar-light .navbar-nav .nav-link:hover {
+  color: #71818c !important;
+}
+nav.navbar.navbar-light .navbar-nav .nav-link:focus {
   opacity: 0.5;
 }
-nav.navbar-light .dropdown-item {
-  color: #fff;
+nav.navbar.navbar-light .dropdown-item {
+  color: #20292f;
 }
-nav.navbar-light .dropdown-item:hover, nav.navbar-light .dropdown-item:focus {
-  background-color: #903B3E;
+nav.navbar.navbar-light .dropdown-item:hover {
+  color: #71818c !important;
+}
+nav.navbar.navbar-light .dropdown-item:focus {
   opacity: 0.5;
 }
 
 main {
-  padding: 4.5rem 0;
+  padding: 6.5rem 0;
+  height: 200vh;
 }
 
 #main-guests-posts-index .img {
@@ -10080,7 +10112,7 @@ main {
 }
 
 #main-guests-posts-show h1 {
-  color: #903B3E;
+  color: #f25b3a;
   background-color: #fff;
   font-weight: 800;
   text-align: center;
@@ -10117,7 +10149,7 @@ main {
 }
 
 #main-admin-post-show h1 {
-  color: #903B3E;
+  color: #f25b3a;
   background-color: #fff;
   font-weight: 800;
   text-align: center;
@@ -10151,8 +10183,38 @@ main {
   z-index: 200;
 }
 
+body.offline {
+  background-image: url("../img/scott-graham-5fNmWej4tAA-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+body.offline .filter {
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+body.offline .fixed-offline {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body.offline .fixed-offline > * {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+body.offline h1 span {
+  color: #f25b3a;
+  font-weight: 900;
+}
+
 footer {
-  background-color: #903B3E;
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   width: 100vw;
