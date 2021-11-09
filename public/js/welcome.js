@@ -101,11 +101,10 @@ var app = new Vue({
     posts: [],
     lastVisit: '',
     cookieConsentVar: false,
-    cookieMsg: false
+    cookieMsg: false,
+    logged: null
   },
   mounted: function mounted() {
-    var _this = this;
-
     this.cookieConsentVar = this.getCookie('cookieConsent');
 
     if (!this.cookieConsentVar) {
@@ -124,39 +123,64 @@ var app = new Vue({
 
     var inOneYear = dayjs().add(1, 'year').$d; // console.log(inOneYear);
 
-    this.cookieConsentVar = this.getCookie('cookieConsent'); // this.cookieConsentVar = false;
-
-    console.log('riga 33 ' + this.cookieConsentVar);
+    this.cookieConsentVar = Boolean(this.getCookie('cookieConsent')); // this.cookieConsentVar = false;
+    //  console.log('riga 33 ' + this.cookieConsentVar);
 
     if (this.cookieConsentVar) {
       this.dateCheck();
-    } //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    }
+
+    this.getUser(); ////azzeramento cookies
+    //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
     //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+    /////fine azzeramento cookies
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
 
-
-    axios.get('/usersapi', {}).then(function (response) {
-      // console.log(response.data.success);
-      if (response.data.success) {
+      if (this.logged) {
         axios.get('/api/postsLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
+
+          _this.posts.forEach(function (post, i) {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
         });
       } else {
         axios.get('/api/postsNotLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
+
+          _this.posts.forEach(function (post, i) {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
         });
       }
-    });
-  },
-  methods: {
+    },
+    getUser: function getUser() {
+      var _this2 = this;
+
+      axios.get('/usersapi', {}).then(function (response) {
+        // console.log(response.data.success);
+        if (response.data.success) {
+          _this2.logged = true; // console.log(this.logged);
+        } else {
+          _this2.logged = false; // console.log(this.logged);
+        }
+
+        _this2.getPosts();
+      });
+    },
     cookieConsentFun: function cookieConsentFun() {
       var inOneYear = dayjs().add(1, 'year').$d;
       document.cookie = "cookieConsent=true; expires=" + inOneYear + "; path=/";
-      this.cookieConsentVar = this.getCookie('cookieConsent');
-      console.log('riga 68' + this.cookieConsentVar);
-      this.dateCheck(); //this.cookieMsg = true;
+      this.cookieConsentVar = this.getCookie('cookieConsent'); // console.log('riga 68' + this.cookieConsentVar);
+
+      this.dateCheck();
+      this.cookieMsg = false;
     },
     getCookie: function getCookie(name) {
       var value = "; ".concat(document.cookie);
@@ -165,13 +189,14 @@ var app = new Vue({
     },
     dateCheck: function dateCheck() {
       var cookieLastVisit = this.getCookie('cookieLastVisit');
-      console.log('ultima visita ' + cookieLastVisit);
-      var cookieControl = this.getCookie('cookieControl');
-      console.log('controllo ' + cookieControl); // dayjs.extend(LocalizedFormat)
+      this.lastVisit = cookieLastVisit; //  console.log('ultima visita ' + cookieLastVisit);
+
+      var cookieControl = this.getCookie('cookieControl'); // console.log('controllo ' + cookieControl);
+      // dayjs.extend(LocalizedFormat)
 
       var now = new Date();
-      now = dayjs(now).format('MMMM D, YYYY');
-      console.log('oggi ' + now); // let nowFormat = dayjs(now).format('MM/DD/YYYY');
+      now = dayjs(now).format('MMMM D, YYYY'); // console.log('oggi ' + now);
+      // let nowFormat = dayjs(now).format('MM/DD/YYYY');
       // console.log(nowFormat);
       // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
       // console.log(cookieLastVisitFormat);
@@ -179,10 +204,9 @@ var app = new Vue({
       // console.log(cookieLastVisitNewFormat);
       // console.log(cookieLastVisitFormat);
 
-      if (now === cookieControl) {
-        console.log('non cambio');
+      if (now === cookieControl) {//console.log('non cambio');
       } else {
-        console.log('cambio');
+        // console.log('cambio');
         var inOneYear = dayjs().add(1, 'year').$d;
         document.cookie = "cookieControl=" + now + "; expires=" + inOneYear + "; path=/"; // document.cookie = 'cookieControl=${now};expires=${inOneYear};'
 
@@ -201,7 +225,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\welcome.js */"./resources/js/welcome.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\progetti\agilemetrics_santillo\resources\js\welcome.js */"./resources/js/welcome.js");
 
 
 /***/ })

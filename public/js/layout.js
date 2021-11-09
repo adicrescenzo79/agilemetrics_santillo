@@ -101,8 +101,7 @@ function myFunction() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   var scrolled = winScroll / height * 100;
-  document.getElementById("myBar").style.width = scrolled + "%";
-  console.log('ciao');
+  document.getElementById("myBar").style.width = scrolled + "%"; // console.log('ciao');
 }
 
 /***/ }),
@@ -114,7 +113,7 @@ function myFunction() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\layout.js */"./resources/js/layout.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\progetti\agilemetrics_santillo\resources\js\layout.js */"./resources/js/layout.js");
 
 
 /***/ })

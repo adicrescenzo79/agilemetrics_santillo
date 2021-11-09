@@ -1,15 +1,16 @@
 Vue.config.devtools = true;
 let app = new Vue({
   el: '#main-welcome',
-  data:{
+  data: {
     api_token: '',
     posts: [],
     lastVisit: '',
     cookieConsentVar: false,
-    cookieMsg: false
+    cookieMsg: false,
+    logged: null,
 
   },
-  mounted(){
+  mounted() {
     this.cookieConsentVar = this.getCookie('cookieConsent');
     if (!this.cookieConsentVar) {
       this.cookieMsg = true;
@@ -32,66 +33,99 @@ let app = new Vue({
 
 
 
-    this.cookieConsentVar = this.getCookie('cookieConsent');
+    this.cookieConsentVar = Boolean(this.getCookie('cookieConsent'));
     // this.cookieConsentVar = false;
 
 
-    console.log('riga 33 '+this.cookieConsentVar);
+    //  console.log('riga 33 ' + this.cookieConsentVar);
 
     if (this.cookieConsentVar) {
       this.dateCheck();
 
     }
+
+    this.getUser();
+    ////azzeramento cookies
+
     //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
     //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
 
-    axios.get('/usersapi',{
-    }).then((response)=>{
-      // console.log(response.data.success);
-      if (response.data.success) {
+    /////fine azzeramento cookies
+
+  },
+  methods: {
+    getPosts: function () {
+      if (this.logged) {
         axios.get('/api/postsLogged', {
-        }).then((response)=>{
+        }).then((response) => {
           // console.log(response.data.data);
           this.posts = response.data.data;
+          this.posts.forEach((post, i) => {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
+
         });
+
       } else {
         axios.get('/api/postsNotLogged', {
-        }).then((response)=>{
+        }).then((response) => {
           // console.log(response.data.data);
           this.posts = response.data.data;
+          this.posts.forEach((post, i) => {
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+          });
         });
+
       }
-    });
-  },
-  methods:{
+    },
+    getUser: function () {
+      axios.get('/usersapi', {
+      }).then((response) => {
+        // console.log(response.data.success);
+        if (response.data.success) {
+          this.logged = true;
+         // console.log(this.logged);
+        } else {
+          this.logged = false;
+         // console.log(this.logged);
 
-    cookieConsentFun: function(){
-      let inOneYear = dayjs().add(1, 'year').$d;
+        }
+        this.getPosts();
 
-      document.cookie = "cookieConsent=true; expires="+inOneYear+"; path=/";
-      this.cookieConsentVar = this.getCookie('cookieConsent');
-      console.log('riga 68'+this.cookieConsentVar);
-      this.dateCheck();
-      //this.cookieMsg = true;
+
+
+      });
+
     },
 
-    getCookie: function(name) {
+    cookieConsentFun: function () {
+      let inOneYear = dayjs().add(1, 'year').$d;
+
+      document.cookie = "cookieConsent=true; expires=" + inOneYear + "; path=/";
+      this.cookieConsentVar = this.getCookie('cookieConsent');
+      // console.log('riga 68' + this.cookieConsentVar);
+      this.dateCheck();
+      this.cookieMsg = false;
+    },
+
+    getCookie: function (name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(';').shift();
     },
 
-    dateCheck: function(){
+    dateCheck: function () {
       let cookieLastVisit = this.getCookie('cookieLastVisit');
-      console.log('ultima visita ' + cookieLastVisit);
+      this.lastVisit = cookieLastVisit;
+      //  console.log('ultima visita ' + cookieLastVisit);
       let cookieControl = this.getCookie('cookieControl');
-      console.log('controllo ' + cookieControl);
+      // console.log('controllo ' + cookieControl);
 
       // dayjs.extend(LocalizedFormat)
       let now = new Date();
       now = dayjs(now).format('MMMM D, YYYY');
-      console.log('oggi ' + now);
+      // console.log('oggi ' + now);
       // let nowFormat = dayjs(now).format('MM/DD/YYYY');
       // console.log(nowFormat);
       // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');
@@ -104,13 +138,13 @@ let app = new Vue({
 
 
       if (now === cookieControl) {
-        console.log('non cambio');
+        //console.log('non cambio');
       } else {
-        console.log('cambio');
+        // console.log('cambio');
         let inOneYear = dayjs().add(1, 'year').$d;
-        document.cookie = "cookieControl="+now+"; expires="+inOneYear+"; path=/";
+        document.cookie = "cookieControl=" + now + "; expires=" + inOneYear + "; path=/";
         // document.cookie = 'cookieControl=${now};expires=${inOneYear};'
-        document.cookie = "cookieLastVisit="+now+"; expires="+inOneYear+"; path=/";
+        document.cookie = "cookieLastVisit=" + now + "; expires=" + inOneYear + "; path=/";
       }
 
     },

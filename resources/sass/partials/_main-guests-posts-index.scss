@@ -1,15 +1,19 @@
-#main-guests-posts-index{
-  .img{
+#main-guests-posts-index {
+  .img {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }
-  .card-body{
+  .card-body {
     max-height: 200px;
-    .card-text{
+    .card-title {
+      color: $primaryColor;
+    }
+    .card-text {
       height: 80%;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: justify;
     }
   }
 }

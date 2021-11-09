@@ -131,7 +131,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\post-show.js */"./resources/js/post-show.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\progetti\agilemetrics_santillo\resources\js\post-show.js */"./resources/js/post-show.js");
 
 
 /***/ })

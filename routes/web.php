@@ -47,9 +47,9 @@ Route::get('/security', function () {
 // })->name('posts.index');
 
 
- Route::get('posts/{slug}', function () {
-     return view('guests.posts.show');
- })->name('posts.show');
+Route::get('posts/{slug}', function () {
+    return view('guests.posts.show');
+})->name('posts.show');
 
 
 

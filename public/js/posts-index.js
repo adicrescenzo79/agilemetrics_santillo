@@ -98,11 +98,10 @@ var app = new Vue({
   el: '#main-guests-posts-index',
   data: {
     api_token: '',
-    posts: []
+    posts: [],
+    logged: null
   },
   mounted: function mounted() {
-    var _this = this;
-
     // axios.get('http://localhost:8000/api/user', {
     // }).then((response)=>{
     // // handle success
@@ -111,9 +110,13 @@ var app = new Vue({
     // // handle error
     //   console.log(error);
     // });
-    axios.get('/usersapi', {}).then(function (response) {
-      // console.log(response.data.success);
-      if (response.data.success) {
+    this.getUser();
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+
+      if (this.logged) {
         axios.get('/api/postsLogged', {}).then(function (response) {
           // console.log(response.data.data);
           _this.posts = response.data.data;
@@ -132,9 +135,24 @@ var app = new Vue({
           });
         });
       }
-    });
-  },
-  methods: {}
+    },
+    getUser: function getUser() {
+      var _this2 = this;
+
+      axios.get('/usersapi', {}).then(function (response) {
+        // console.log(response.data.success);
+        if (response.data.success) {
+          _this2.logged = true;
+          console.log(_this2.logged);
+        } else {
+          _this2.logged = false;
+          console.log(_this2.logged);
+        }
+
+        _this2.getPosts();
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -146,7 +164,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\Boolean\agilemetrics_santillo\resources\js\posts-index.js */"./resources/js/posts-index.js");
+module.exports = __webpack_require__(/*! C:\Users\adicr\Documents\progetti\agilemetrics_santillo\resources\js\posts-index.js */"./resources/js/posts-index.js");
 
 
 /***/ })

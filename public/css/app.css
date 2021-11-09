@@ -10031,7 +10031,7 @@ body {
 }
 
 .btn-primary-pers {
-  background-color: #f25b3a;
+  background-color: #903B3E;
   color: #fff;
   border: none;
   border-radius: 0;
@@ -10039,11 +10039,15 @@ body {
   font-weight: 700;
 }
 .btn-primary-pers:hover, .btn-primary-pers:focus, .btn-primary-pers:active {
-  background-color: #bd4a31 !important;
+  background-color: #752f31 !important;
   color: #fff;
 }
 .btn-primary-pers:focus {
   box-shadow: 0 0 0 0.2rem rgba(117, 47, 49, 0.25);
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 nav.navbar {
@@ -10099,7 +10103,7 @@ header .progress-container {
 }
 header .progress-bar {
   height: 8px;
-  background: #f25b3a;
+  background: #903B3E;
   width: 0%;
 }
 
@@ -10116,14 +10120,18 @@ main {
 #main-guests-posts-index .card-body {
   max-height: 200px;
 }
+#main-guests-posts-index .card-body .card-title {
+  color: #903B3E;
+}
 #main-guests-posts-index .card-body .card-text {
   height: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: justify;
 }
 
 #main-guests-posts-show h1 {
-  color: #f25b3a;
+  color: #903B3E;
   background-color: #fff;
   font-weight: 800;
   text-align: center;
@@ -10160,7 +10168,7 @@ main {
 }
 
 #main-admin-post-show h1 {
-  color: #f25b3a;
+  color: #903B3E;
   background-color: #fff;
   font-weight: 800;
   text-align: center;
@@ -10189,7 +10197,6 @@ main {
 #main-welcome #cookies {
   top: 0;
   width: 100vw;
-  height: 100vh;
   background-color: rgba(144, 59, 62, 0.5);
   z-index: 200;
 }
@@ -10220,7 +10227,7 @@ body.offline .fixed-offline > * {
   margin-bottom: 20px;
 }
 body.offline h1 span {
-  color: #f25b3a;
+  color: #903B3E;
   font-weight: 900;
 }
 body.offline h2 {
