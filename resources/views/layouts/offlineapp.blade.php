@@ -37,6 +37,12 @@
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
 
+        <!-- TINY -->
+        <script src="https://cdn.tiny.cloud/1/rvz6bh47hv6a0msen7wzu4dseth2cqxxgscyrumdym3qyds0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  </script>
+
+
+
   {{-- AXIOS --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
     integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="

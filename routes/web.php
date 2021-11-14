@@ -24,6 +24,12 @@ Route::get('/', function () {
 
 })->name('offline');
 
+//prova tiny
+Route::get('tiny', function(){
+  return view('prova-tiny');
+})->name('tiny');
+
+
 
 
 Route::prefix('my')->group(function(){
@@ -33,6 +39,8 @@ Route::prefix('my')->group(function(){
 Route::get('/usersapi', 'UserController@index');
 
 Route::get('/welcome', 'HomeController@index')->name('welcome');
+
+
 
 Route::get('/posts', 'HomeController@posts')->name('posts.index');
 
@@ -58,4 +66,5 @@ Route::get('posts/{slug}', function () {
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 ->group(function (){
   Route::resource('posts', 'PostController');
+
 });
