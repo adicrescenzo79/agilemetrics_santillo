@@ -1,21 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Article;
-
+use App\ArtContent;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Support\Facades\Storage;
-
-use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Str;
-
-
-class ArticleController extends Controller
+class ArtContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,14 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        if ($id == 1) {
-          $articles = Article::where('user_id', '=', $id)->get();
-          return view('admin.articles.index', compact('articles'));
-        } else {
-          return view('security');
-        }
-      }
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -57,10 +41,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\ArtContent  $artContent
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(ArtContent $artContent)
     {
         //
     }
@@ -68,10 +52,10 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\ArtContent  $artContent
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(ArtContent $artContent)
     {
         //
     }
@@ -80,10 +64,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Article  $article
+     * @param  \App\ArtContent  $artContent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, ArtContent $artContent)
     {
         //
     }
@@ -91,10 +75,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Article  $article
+     * @param  \App\ArtContent  $artContent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(ArtContent $artContent)
     {
         //
     }

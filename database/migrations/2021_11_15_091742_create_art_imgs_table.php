@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticlesTable extends Migration
+class CreateArtImgsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('art_imgs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->string('title');
-            $table->string('subtitle');
-            $table->string('slug')->unique();
-            $table->text('cover')->nullable();
-            $table->tinyInteger('visibility');
+            $table->unsignedBigInteger("article_id");
+            $table->string('caption');
+            $table->text('image');
+            $table->tinyInteger('order');
             $table->timestamps();
 
-            $table->foreign("user_id")
+            $table->foreign("article_id")
             ->references("id")
-            ->on("users")
+            ->on("articles")
             ->onDelete("cascade");
 
         });
@@ -38,6 +36,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('art_imgs');
     }
 }
