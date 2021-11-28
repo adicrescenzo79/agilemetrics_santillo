@@ -24,6 +24,12 @@ Route::get('/', function () {
 
 })->name('offline');
 
+Route::get('/tiny', function () {
+  return view('tiny');
+
+})->name('tiny');
+
+
 
 Route::prefix('my')->group(function(){
   Auth::routes();
@@ -36,6 +42,8 @@ Route::get('/welcome', 'HomeController@index')->name('welcome');
 
 
 Route::get('/posts', 'HomeController@posts')->name('posts.index');
+Route::get('/articles', 'HomeController@articles')->name('articles.index');
+
 
 Route::get('/security', function () {
   return view('security');
@@ -44,14 +52,22 @@ Route::get('/security', function () {
 // RIATTIVARE QUESTE ROTTE QUA SOTTO
 
 // Route::get('posts', function () {
-//     return view('guests.posts.index');
-// })->name('posts.index');
+  //     return view('guests.posts.index');
+  // })->name('posts.index');
 
+  // Route::get('articles', function () {
+  //     return view('guests.articles.index');
+  // })->name('articles.index');
 
-Route::get('posts/{slug}', function () {
+  
+  
+  Route::get('posts/{slug}', function () {
     return view('guests.posts.show');
 })->name('posts.show');
 
+Route::get('articles/{slug}', function () {
+    return view('guests.articles.show');
+})->name('articles.show');
 
 
   
@@ -63,3 +79,5 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 
 
 });
+
+Route::post('/upload', 'PostTasksController@upload');

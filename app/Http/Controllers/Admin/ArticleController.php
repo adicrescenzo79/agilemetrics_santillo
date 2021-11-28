@@ -40,7 +40,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.articles.create');
     }
 
     /**
@@ -51,9 +51,44 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+          // 'category_id' => 'exists:categories,id|nullable',
+          'title' => 'required|string|max:255',
+          'subtitle' => 'nullable|string|max:255',
+          'content' => 'required|string',
+         // 'cover' => 'nullable|image|max:6000',
+          'cover' => 'mimes:jpeg,jpg,png,gif|nullable|max:10000',
+          'visibility' => 'required|boolean',
 
+          // 'tag_ids.*' => 'exists:tags,id',
+        ]);
+  
+  
+        $data = $request->all();
+  
+        $article = new Article();
+        $article['user_id'] = Auth::id();
+        $article->fill($data);
+  
+        $article->slug = $this->generateSlug($article->title);
+  
+        $cover = NULL;
+        if (array_key_exists('cover', $data)) {
+          $cover = Storage::put('uploads', $data['cover']);
+          $article->cover = '../storage/' . $cover;
+        }
+  
+        $article->save();
+  
+        // if (array_key_exists('tag_ids', $data)) {
+        //   $article->tags()->attach($data['tag_ids']);
+        // }
+  
+        // Mail::to('nail@mail.it')->send(new SendNewMail());
+  
+        return redirect()->route('admin.articles.index');
+      }
+  
     /**
      * Display the specified resource.
      *
@@ -62,7 +97,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('admin.articles.show', compact('article'));
     }
 
     /**
@@ -73,7 +108,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
@@ -85,8 +120,45 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
-    }
+        $request->validate([
+            // 'category_id' => 'exists:categories,id|nullable',
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'content' => 'required|string',
+            'cover' => 'mimes:jpeg,jpg,png,gif|nullable|max:10000',
+            'visibility' => 'required|boolean',
+    
+                // 'tag_ids.*' => 'exists:tags,id',
+          ]);
+    
+          $data = $request->all();
+    
+          // qui va fatta la creazione dell'immagine
+    
+          $data['slug'] = $this->generateSlug($data['title'], $article->title != $data['title'], $article->slug);
+    
+          if (array_key_exists('cover', $data)) {
+            $cover = Storage::put('uploads', $data['cover']);
+            $data['cover'] = '../storage/' . $cover;
+          }
+    
+    
+    
+          $article->update($data);
+    
+    
+          // if (array_key_exists('tag_ids', $data)) {
+          //   $article->tags()->sync($data['tag_ids']);
+          // } else {
+          //   $article->tags()->detach();
+          // }
+    
+    
+    
+          $article->save();
+    
+          return redirect()->route('admin.articles.index');
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -96,6 +168,34 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('admin.articles.index');
     }
+
+    private function generateSlug(string $title, bool $change = true)
+    {
+    $slug = Str::slug($title, '-');
+
+    if (!$change) {
+        return $slug;
+    }
+
+    $slug_base = $slug;
+    $contatore = 1;
+
+    $article_with_slug = Article::where('slug', '=', $slug)->first();
+    while ($article_with_slug) {
+        $slug = $slug_base . '-' . $contatore;
+        $contatore++;
+
+        $article_with_slug = Article::where('slug', '=', $slug)->first();
+    }
+    return $slug;
+
+    }
+
+    
+  
+  
 }

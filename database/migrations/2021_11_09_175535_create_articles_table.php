@@ -17,7 +17,8 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->string('title');
-            $table->string('subtitle');
+            $table->string('subtitle')->nullable();
+            $table->text('content');
             $table->string('slug')->unique();
             $table->text('cover')->nullable();
             $table->tinyInteger('visibility');

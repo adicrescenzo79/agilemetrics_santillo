@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('guests.posts.index');
     }
 
+    public function articles()
+    {
+        return view('guests.articles.index');
+    }
+
 
 
 }

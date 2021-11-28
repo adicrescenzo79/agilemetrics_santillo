@@ -23,3 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/postsLogged', 'PostController@logged');
 Route::get('/postsNotLogged', 'PostController@notLogged');
 Route::get('/posts/slug/{slug}', 'PostController@postBySlug');
+
+Route::get('/articlesLogged', 'ArticleController@logged');
+Route::get('/articlesNotLogged', 'ArticleController@notLogged');
+Route::get('/articles/slug/{slug}', 'ArticleController@articleBySlug');
+Route::get('/articles/id/{id}', 'ArticleController@articleById');
+

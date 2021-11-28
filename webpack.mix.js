@@ -21,4 +21,9 @@ mix.js('resources/js/post-show.js', 'public/js');
 mix.js('resources/js/welcome.js', 'public/js');
 mix.js('resources/js/admin-posts-index.js', 'public/js');
 mix.js('resources/js/layout.js', 'public/js');
+mix.js('resources/js/article.js', 'public/js');
+mix.js('resources/js/articles-index.js', 'public/js');
+mix.js('resources/js/article-show.js', 'public/js');
+mix.js('resources/js/admin-article-show.js', 'public/js');
+
 

@@ -1,85 +1,56 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Article;
+
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  public function notLogged()
+  {
+      $articles = Article::where('visibility', '=', 1)->orderBy('created_at', 'DESC')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+      return response()->json([
+        'data' => $articles,
+        'success' => true,
+      ]);
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function logged()
+  {
+      $articles = Article::orderBy('created_at', 'DESC')->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Article $article)
-    {
-        //
-    }
+      return response()->json([
+        'data' => $articles,
+        'success' => true,
+      ]);
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Article $article)
-    {
-        //
-    }
+  public function articleBySlug(string $slug)
+  {
+    $article = Article::where('slug', '=', $slug)->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Article $article)
-    {
-        //
-    }
+    return response()->json([
+      'data' => $article,
+      'success' => true,
+    ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Article $article)
-    {
-        //
-    }
+  }
+
+  
+  public function articleById(string $id)
+  {
+    $article = Article::where('id', '=', $id)->first();
+
+    return response()->json([
+      'data' => $article,
+      'success' => true,
+    ]);
+
+  }
+
+
+
 }

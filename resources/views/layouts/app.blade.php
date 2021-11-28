@@ -37,6 +37,9 @@
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
 
+    {{-- TIMYMCE --}}
+    <script src="https://cdn.tiny.cloud/1/rvz6bh47hv6a0msen7wzu4dseth2cqxxgscyrumdym3qyds0/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
 
 
 {{-- AXIOS --}}

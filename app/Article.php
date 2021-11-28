@@ -10,6 +10,7 @@ class Article extends Model
         'user_id',
         'title',
         'subtitle',
+        'content',
         'slug',
         'cover',
         'visibility',
@@ -19,16 +20,4 @@ class Article extends Model
       {
         return $this->belongsTo('App\User');
       }
-
-      public function artImgs()
-      {
-        return $this->hasMany('App\ArtImg');
-      }
-      
-      public function artContents()
-      {
-        return $this->hasMany('App\ArtContent');
-      }
-    
-    
 }
