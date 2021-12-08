@@ -1,15 +1,14 @@
 //Colors
-.bg-primary-pers{
+.bg-primary-pers {
   background-color: $backGround;
-
 }
 
-.txt-light{
+.txt-light {
   color: $txtColorLight;
 }
 
 //buttons
-.btn-primary-pers{
+.btn-primary-pers {
   background-color: $primaryColor;
   //border-color: $primaryColorDark;
   color: $txtColorLight;
@@ -19,17 +18,80 @@
   font-weight: 700;
   &:hover,
   &:focus,
-  &:active{
+  &:active {
     background-color: $primaryColorDark !important;
     //border-color: $primaryColorDark !important;
     color: $txtColorLight;
   }
-  &:focus{
+  &:focus {
     box-shadow: 0 0 0 0.2rem rgb(117 47 49 / 25%);
   }
 }
 
-
-a:hover{
+a:hover {
   text-decoration: none;
 }
+
+.carousel {
+  width: max-content;
+  .slide {
+    position: relative;
+    left: 25vw;
+    width: max-content;
+    height: 27vw;
+    transition: all 0.5s ease-in-out 0s;
+    .item {
+      width: 44vw;
+      height: 24vw;
+      margin: 0 3vw;
+      display: inline-block;
+      transition: all 0.5s ease-in-out 0s;
+      background-size: cover;
+      .item-text {
+        display: none;
+        transition: display 1s ease-in-out 1s;
+        margin-top: 3vw;
+        margin-left: 4vw;
+        h2 {
+          font-size: 24px;
+          margin-bottom: 36px;
+        }
+      }
+      &.active {
+        width: 45vw;
+        height: 27vw;
+        .item-text {
+          display: flex;
+        }
+      }
+    }
+  }
+  .my-controls {
+    color: #fff;
+    position: absolute;
+    width: 100vw;
+    height: 80px;
+    bottom: 0;
+    background-color: rgba($color: #26262a, $alpha: 0.53);
+    font-weight: 100;
+    backdrop-filter: blur(10px);
+    i {
+      opacity: 0.53;
+      font-size: 16px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+      }
+    }
+    .my-dots {
+      margin: 0 176px;
+
+      .dot {
+        margin: 0 10px;
+      }
+    }
+  }
+}
+
+

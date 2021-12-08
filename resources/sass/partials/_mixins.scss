@@ -1,25 +1,50 @@
-@mixin flex-center{
+@mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin py($dimension){
+@mixin py($dimension) {
   padding-top: #{$dimension};
   padding-bottom: #{$dimension};
 }
 
-@mixin px($dimension){
+@mixin px($dimension) {
   padding-right: #{$dimension};
   padding-left: #{$dimension};
 }
 
-@mixin ptb($dimensionT, $dimensionB){
+@mixin ptb($dimensionT, $dimensionB) {
   padding-top: #{$dimensionT};
   padding-bottom: #{$dimensionB};
 }
 
-@mixin plr($dimensionL, $dimensionR){
+@mixin plr($dimensionL, $dimensionR) {
   padding-top: #{$dimensionL};
   padding-bottom: #{$dimensionR};
+}
+
+@mixin my($dimension) {
+  margin-top: #{$dimension};
+  margin-bottom: #{$dimension};
+}
+
+@mixin mx($dimension) {
+  margin-left: #{$dimension};
+  margin-right: #{$dimension};
+}
+
+@for $i from 1 through 100 {
+  .px-#{$i}px {
+    @include px(#{$i}px);
+  }
+  .mx-#{$i}px {
+    @include mx(#{$i}px);
+  }
+  .py-#{$i}px {
+    @include py(#{$i}px);
+  }
+  .my-#{$i}px {
+    @include my(#{$i}px);
+  }
 }

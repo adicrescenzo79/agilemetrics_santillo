@@ -102,7 +102,9 @@ var app = new Vue({
     lastVisit: '',
     cookieConsentVar: false,
     cookieMsg: false,
-    logged: null
+    logged: null,
+    activePost: 0,
+    move: 0
   },
   mounted: function mounted() {
     this.cookieConsentVar = this.getCookie('cookieConsent');
@@ -146,19 +148,43 @@ var app = new Vue({
           _this.posts = response.data.data;
 
           _this.posts.forEach(function (post, i) {
-            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-          });
+            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY'); //console.log(post);
+          }); //console.log(this.posts);
+
         });
       } else {
         axios.get('/api/postsNotLogged', {}).then(function (response) {
           // console.log(response.data.data);
-          _this.posts = response.data.data;
+          _this.posts = response.data;
 
           _this.posts.forEach(function (post, i) {
             post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-          });
+          }); // console.log(posts);
+
         });
       }
+    },
+    prev: function prev() {
+      if (this.activePost == 0) {
+        this.activePost = this.posts.length - 1;
+        this.move = -50 * (this.posts.length - 1);
+      } else {
+        this.activePost -= 1;
+        this.move += 50;
+      }
+    },
+    next: function next() {
+      if (this.activePost == this.posts.length - 1) {
+        this.activePost = 0;
+        this.move = 0;
+      } else {
+        this.activePost += 1;
+        this.move -= 50;
+      }
+    },
+    select_item: function select_item(i) {
+      this.activePost = i;
+      this.move = -50 * i;
     },
     getUser: function getUser() {
       var _this2 = this;

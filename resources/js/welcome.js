@@ -8,6 +8,9 @@ let app = new Vue({
     cookieConsentVar: false,
     cookieMsg: false,
     logged: null,
+    activePost: 0,
+    move: 0,
+
 
   },
   mounted() {
@@ -63,7 +66,10 @@ let app = new Vue({
           this.posts = response.data.data;
           this.posts.forEach((post, i) => {
             post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+            //console.log(post);
           });
+          //console.log(this.posts);
+
 
         });
 
@@ -71,24 +77,50 @@ let app = new Vue({
         axios.get('/api/postsNotLogged', {
         }).then((response) => {
           // console.log(response.data.data);
-          this.posts = response.data.data;
+          this.posts = response.data;
           this.posts.forEach((post, i) => {
             post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
           });
+          // console.log(posts);
+
         });
 
       }
+
     },
+    prev: function () {
+      if (this.activePost == 0) {
+        this.activePost = this.posts.length - 1;
+        this.move = -50 * (this.posts.length - 1);
+      } else {
+        this.activePost -= 1;
+        this.move += 50;
+      }
+    },
+    next: function () {
+      if (this.activePost == this.posts.length - 1) {
+        this.activePost = 0;
+        this.move = 0;
+      } else {
+        this.activePost += 1;
+        this.move -= 50;
+      }
+    },
+    select_item: function (i) {
+      this.activePost = i;
+      this.move = -50 * i;
+    },
+
     getUser: function () {
       axios.get('/usersapi', {
       }).then((response) => {
         // console.log(response.data.success);
         if (response.data.success) {
           this.logged = true;
-         // console.log(this.logged);
+          // console.log(this.logged);
         } else {
           this.logged = false;
-         // console.log(this.logged);
+          // console.log(this.logged);
 
         }
         this.getPosts();
@@ -149,4 +181,7 @@ let app = new Vue({
 
     },
   },
-})
+});
+
+
+

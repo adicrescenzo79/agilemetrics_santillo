@@ -1,10 +1,14 @@
-#main-welcome{
-  #cookies{
+#main-welcome {
+  #cookies {
     // top: 30vh;
     top: 0;
     width: 100vw;
-  //  height: 100vh;
+    //  height: 100vh;
     background-color: rgba(144, 59, 62, 0.5);
     z-index: 200;
+  }
+
+  section#posts {
+    
   }
 }
