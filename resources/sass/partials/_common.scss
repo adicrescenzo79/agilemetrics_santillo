@@ -31,14 +31,22 @@
 a:hover {
   text-decoration: none;
 }
+.my-caps {
+  text-transform: lowercase;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
 
 .carousel {
   width: max-content;
+  left: -5vw;
+  background-color: red;
   .slide {
     position: relative;
     left: 25vw;
     width: max-content;
-    height: 27vw;
+    height: 50vw; //height: 27vw;
     transition: all 0.5s ease-in-out 0s;
     .item {
       width: 44vw;
@@ -47,51 +55,64 @@ a:hover {
       display: inline-block;
       transition: all 0.5s ease-in-out 0s;
       background-size: cover;
-      .item-text {
-        display: none;
-        transition: display 1s ease-in-out 1s;
-        margin-top: 3vw;
-        margin-left: 4vw;
-        h2 {
-          font-size: 24px;
-          margin-bottom: 36px;
-        }
-      }
+      background-repeat: no-repeat;
+      background-position: center;
+
       &.active {
-        width: 45vw;
-        height: 27vw;
+        width: 64vw; //width: 45vw;
+        height: 44vw; //height: 27vw;
         .item-text {
           display: flex;
         }
       }
     }
   }
-  .my-controls {
+  .low-bar {
     color: #fff;
     position: absolute;
-    width: 100vw;
-    height: 80px;
+    width: 101vw;
     bottom: 0;
-    background-color: rgba($color: #26262a, $alpha: 0.53);
+    background-color: rgba($color: #bfb4b4, $alpha: 0.53);
     font-weight: 100;
     backdrop-filter: blur(10px);
+    @include py(20px);
+    .item-text {
+      // display: none;
+      transition: all 0.25s linear;
+      // margin-top: 3vw;
+      // margin-left: 4vw;
+      color: #fff;
+      &.transparent {
+        opacity: 0;
+      }
+
+      h2 {
+        font-size: 40px;
+        margin-bottom: 20px;
+      }
+    }
+
     i {
       opacity: 0.53;
-      font-size: 16px;
+      font-size: 32px;
+      transition: all 0.2s linear;
 
       &:hover {
         cursor: pointer;
         opacity: 1;
+        transform: scale(1.2);
       }
     }
     .my-dots {
       margin: 0 176px;
 
       .dot {
+        font-size: 11px;
         margin: 0 10px;
       }
     }
   }
 }
+@media (min-width: 1200px) {
 
-
+}

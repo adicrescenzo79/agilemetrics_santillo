@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/posts', 'PostController@all');
+
 Route::get('/postsLogged', 'PostController@logged');
 Route::get('/postsNotLogged', 'PostController@notLogged');
 Route::get('/posts/slug/{slug}', 'PostController@postBySlug');

@@ -18,6 +18,22 @@ class PostController extends Controller
       ]);
   }
 
+  public function all(Request $request)
+  {
+    if ($request->logged){
+      $posts = Post::orderBy('created_at', 'DESC')->get();
+
+    } else {
+      $posts = Post::where('visibility', '=', 1)->orderBy('created_at', 'DESC')->get();
+    }
+
+      return response()->json([
+        'data' => $posts,
+        'success' => true,
+      ]);
+  }
+
+
   public function logged()
   {
       $posts = Post::orderBy('created_at', 'DESC')->get();
@@ -27,6 +43,8 @@ class PostController extends Controller
         'success' => true,
       ]);
   }
+
+
 
   public function postBySlug(string $slug)
   {

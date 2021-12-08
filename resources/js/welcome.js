@@ -8,12 +8,51 @@ let app = new Vue({
     cookieConsentVar: false,
     cookieMsg: false,
     logged: null,
-    activePost: 0,
     move: 0,
+    activePost: 0,
+    windowWidth: window.innerWidth,
+    txt: "",
+    moveStep: null,
+    carouselLeft: null,
 
 
   },
+  watch: {
+    windowWidth(newWidth, oldWidth) {
+      this.txt = `it changed to ${newWidth} from ${oldWidth}`;
+      // console.log(this.txt);
+      if (newWidth > 1200) {
+        this.moveStep = 50;
+        this.carouselLeft = 22;
+      } else if (newWidth > 576 && newWidth <= 1200) {
+        this.moveStep = 50;
+        this.carouselLeft = 5;
+        this.move = 10;
+
+
+      } else if (newWidth <= 576) {
+        this.moveStep = 85; // verificare ipad
+      }
+    },
+  },
+
   mounted() {
+    var width = $(window).width();
+    if (width > 1200) {
+      this.moveStep = 50;
+      this.carouselLeft = 22;
+    } else if (width > 576 && width <= 1200) {
+      this.moveStep = 50;
+      this.carouselLeft = 5;
+      this.move = 10;
+
+    } else if (width <= 576) {
+      this.moveStep = 85; // verificare ipad
+    }
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+
     this.cookieConsentVar = this.getCookie('cookieConsent');
     if (!this.cookieConsentVar) {
       this.cookieMsg = true;
@@ -56,59 +95,89 @@ let app = new Vue({
 
     /////fine azzeramento cookies
 
+
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+
   methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+      this.move = 0;
+      this.activePost = 0;
+    },
+
     getPosts: function () {
-      if (this.logged) {
-        axios.get('/api/postsLogged', {
-        }).then((response) => {
-          // console.log(response.data.data);
+      axios({
+        method: "get",
+        url: window.location.origin + "/api/posts",
+        params: {
+          logged: this.logged,
+        },
+      })
+        .then((response) => {
           this.posts = response.data.data;
           this.posts.forEach((post, i) => {
             post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-            //console.log(post);
           });
-          //console.log(this.posts);
-
-
+          // this.autoCarousel();
         });
-
-      } else {
-        axios.get('/api/postsNotLogged', {
-        }).then((response) => {
-          // console.log(response.data.data);
-          this.posts = response.data;
-          this.posts.forEach((post, i) => {
-            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-          });
-          // console.log(posts);
-
-        });
-
-      }
 
     },
-    prev: function () {
+    autoCarousel: function () {
+      setInterval(() => {
+        this.nextPost();
+      }, 10000);
+    },
+    prevPost: function () {
+      $('#post-title').addClass('transparent');
+
       if (this.activePost == 0) {
         this.activePost = this.posts.length - 1;
-        this.move = -50 * (this.posts.length - 1);
+        this.move = this.moveStep * (this.posts.length - 1);
       } else {
         this.activePost -= 1;
-        this.move += 50;
+        this.move -= this.moveStep;
       }
+      console.log(this.move);
+      setTimeout(() => {
+        $('#post-title').removeClass('transparent');
+
+      }, 500);
+
     },
-    next: function () {
+
+    nextPost: function () {
+      $('#post-title').addClass('transparent');
       if (this.activePost == this.posts.length - 1) {
         this.activePost = 0;
         this.move = 0;
       } else {
         this.activePost += 1;
-        this.move -= 50;
+        this.move += this.moveStep;
+
       }
+      console.log(this.move);
+
+      setTimeout(() => {
+        $('#post-title').removeClass('transparent');
+
+      }, 500);
+
     },
-    select_item: function (i) {
+
+
+    selectPost: function (i) {
+      $('#post-title').addClass('transparent');
+
       this.activePost = i;
       this.move = -50 * i;
+      setTimeout(() => {
+        $('#post-title').removeClass('transparent');
+
+      }, 500);
+
     },
 
     getUser: function () {

@@ -103,10 +103,48 @@ var app = new Vue({
     cookieConsentVar: false,
     cookieMsg: false,
     logged: null,
+    move: 0,
     activePost: 0,
-    move: 0
+    windowWidth: window.innerWidth,
+    txt: "",
+    moveStep: null,
+    carouselLeft: null
+  },
+  watch: {
+    windowWidth: function windowWidth(newWidth, oldWidth) {
+      this.txt = "it changed to ".concat(newWidth, " from ").concat(oldWidth); // console.log(this.txt);
+
+      if (newWidth > 1200) {
+        this.moveStep = 50;
+        this.carouselLeft = 22;
+      } else if (newWidth > 576 && newWidth <= 1200) {
+        this.moveStep = 50;
+        this.carouselLeft = 5;
+        this.move = 10;
+      } else if (newWidth <= 576) {
+        this.moveStep = 85; // verificare ipad
+      }
+    }
   },
   mounted: function mounted() {
+    var _this = this;
+
+    var width = $(window).width();
+
+    if (width > 1200) {
+      this.moveStep = 50;
+      this.carouselLeft = 22;
+    } else if (width > 576 && width <= 1200) {
+      this.moveStep = 50;
+      this.carouselLeft = 5;
+      this.move = 10;
+    } else if (width <= 576) {
+      this.moveStep = 85; // verificare ipad
+    }
+
+    this.$nextTick(function () {
+      window.addEventListener("resize", _this.onResize);
+    });
     this.cookieConsentVar = this.getCookie('cookieConsent');
 
     if (!this.cookieConsentVar) {
@@ -138,66 +176,92 @@ var app = new Vue({
     //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
     /////fine azzeramento cookies
   },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
   methods: {
-    getPosts: function getPosts() {
-      var _this = this;
-
-      if (this.logged) {
-        axios.get('/api/postsLogged', {}).then(function (response) {
-          // console.log(response.data.data);
-          _this.posts = response.data.data;
-
-          _this.posts.forEach(function (post, i) {
-            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY'); //console.log(post);
-          }); //console.log(this.posts);
-
-        });
-      } else {
-        axios.get('/api/postsNotLogged', {}).then(function (response) {
-          // console.log(response.data.data);
-          _this.posts = response.data;
-
-          _this.posts.forEach(function (post, i) {
-            post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-          }); // console.log(posts);
-
-        });
-      }
+    onResize: function onResize() {
+      this.windowWidth = window.innerWidth;
+      this.move = 0;
+      this.activePost = 0;
     },
-    prev: function prev() {
+    getPosts: function getPosts() {
+      var _this2 = this;
+
+      axios({
+        method: "get",
+        url: window.location.origin + "/api/posts",
+        params: {
+          logged: this.logged
+        }
+      }).then(function (response) {
+        _this2.posts = response.data.data;
+
+        _this2.posts.forEach(function (post, i) {
+          post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+        }); // this.autoCarousel();
+
+      });
+    },
+    autoCarousel: function autoCarousel() {
+      var _this3 = this;
+
+      setInterval(function () {
+        _this3.nextPost();
+      }, 10000);
+    },
+    prevPost: function prevPost() {
+      $('#post-title').addClass('transparent');
+
       if (this.activePost == 0) {
         this.activePost = this.posts.length - 1;
-        this.move = -50 * (this.posts.length - 1);
+        this.move = this.moveStep * (this.posts.length - 1);
       } else {
         this.activePost -= 1;
-        this.move += 50;
+        this.move -= this.moveStep;
       }
+
+      console.log(this.move);
+      setTimeout(function () {
+        $('#post-title').removeClass('transparent');
+      }, 500);
     },
-    next: function next() {
+    nextPost: function nextPost() {
+      $('#post-title').addClass('transparent');
+
       if (this.activePost == this.posts.length - 1) {
         this.activePost = 0;
         this.move = 0;
       } else {
         this.activePost += 1;
-        this.move -= 50;
+        this.move += this.moveStep;
       }
+
+      console.log(this.move);
+      setTimeout(function () {
+        $('#post-title').removeClass('transparent');
+      }, 500);
     },
-    select_item: function select_item(i) {
+    selectPost: function selectPost(i) {
+      $('#post-title').addClass('transparent');
       this.activePost = i;
       this.move = -50 * i;
+      setTimeout(function () {
+        $('#post-title').removeClass('transparent');
+      }, 500);
     },
     getUser: function getUser() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get('/usersapi', {}).then(function (response) {
         // console.log(response.data.success);
         if (response.data.success) {
-          _this2.logged = true; // console.log(this.logged);
+          _this4.logged = true; // console.log(this.logged);
         } else {
-          _this2.logged = false; // console.log(this.logged);
+          _this4.logged = false; // console.log(this.logged);
         }
 
-        _this2.getPosts();
+        _this4.getPosts();
       });
     },
     cookieConsentFun: function cookieConsentFun() {
