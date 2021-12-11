@@ -14,47 +14,70 @@
 
   {{-- SLIDE ULTIMI POST --}}
 
-  <div class="">
 
-    <section id="posts">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="carousel" :style="{ left: - carouselLeft + 'vw' }">
-              <div class="slide d-flex align-items-center" :style="{ marginLeft: - move + 'vw' }">
-                <a class="item pointer" v-for="(item, i) in posts"
-                  :style="{ backgroundImage: 'url(' + item.cover + ')' } " :class="activePost == i ? 'active' : ''"
-                  :href="'/posts/' + item.slug">
-                </a>
-              </div>
-              <div class="low-bar d-flex flex-column align-items-center justify-content-center">
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" id="carousel" v-if="carouselLoaded">
 
-                <div id="post-title" class="item-text flex-column" v-if="posts.length">
-                  <h2 class="my-caps">@{{posts[activePost].title}}</h2>
-                </div>
-                <div class="my-controls d-flex align-items-center justify-content-center">
 
-                  <div class="my-prev" @click="prevPost()">
-                    <i class="fas fa-chevron-left"></i>
-                  </div>
-                  <div class="my-dots">
-                    <i v-for="(dot, i) in posts.length" :class="i == activePost ? 'fas' : 'far'" class="fa-circle dot"
-                      @click="selectPost(i)"></i>
-                  </div>
-                  <div class="my-next" @click="nextPost()">
-                    <i class="fas fa-chevron-right"></i>
+          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li v-for="(line, i) in mixedItems.length" data-target="#carouselExampleIndicators" :data-slide-to="i"
+                class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+              <a class="carousel-item pointer" v-for="(item, i) in mixedItems" v-if="item != undefined" :id="i"
+                :href="'/'+item.type+'/'+item.slug">
+                <div class="external w-100 ">
+                  <div class="internal " :style="{ backgroundImage: `url(${item.cover})` }">
+
                   </div>
                 </div>
-              </div>
+                <div class="carousel-caption d-none d-md-block">
+                  <h1 class="my-caps">@{{item.title}}</h1>
+                  <h6 v-if="item.type == 'articles'">
+                    Articolo
+                  </h6>
+                  <h6 v-else-if="item.type == 'posts'">
+                    Post
+                  </h6>
+                  <h5>@{{item.created_at}}</h5>
+                </div>
+              </a>
             </div>
+            <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions"
+              data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions"
+              data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </button>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
 
-  </div>
+
 
 </div>
 @endsection
@@ -62,5 +85,3 @@
 @section('foot-script')
 <script src="{{asset('js/welcome.js')}}" charset="utf-8"></script>
 @endsection
-
-{{-- :class="activePost == i ? 'active' : ''" --}}

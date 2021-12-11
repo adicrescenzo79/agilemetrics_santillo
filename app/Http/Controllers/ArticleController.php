@@ -51,6 +51,22 @@ class ArticleController extends Controller
 
   }
 
+  public function all(Request $request)
+  {
+    if ($request->logged){
+      $articles = Article::orderBy('created_at', 'DESC')->get();
+
+    } else {
+      $articles = Article::where('visibility', '=', 1)->orderBy('created_at', 'DESC')->get();
+    }
+
+      return response()->json([
+        'data' => $articles,
+        'success' => true,
+      ]);
+  }
+
+
 
 
 }

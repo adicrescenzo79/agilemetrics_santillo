@@ -4,54 +4,20 @@ let app = new Vue({
   data: {
     api_token: '',
     posts: [],
+    articles: [],
+
     lastVisit: '',
     cookieConsentVar: false,
     cookieMsg: false,
     logged: null,
-    move: 0,
-    activePost: 0,
-    windowWidth: window.innerWidth,
     txt: "",
-    moveStep: null,
-    carouselLeft: null,
 
+    mixedItems: [],
+    carouselLoaded: false,
 
-  },
-  watch: {
-    windowWidth(newWidth, oldWidth) {
-      this.txt = `it changed to ${newWidth} from ${oldWidth}`;
-      // console.log(this.txt);
-      if (newWidth > 1200) {
-        this.moveStep = 50;
-        this.carouselLeft = 22;
-      } else if (newWidth > 576 && newWidth <= 1200) {
-        this.moveStep = 50;
-        this.carouselLeft = 5;
-        this.move = 10;
-
-
-      } else if (newWidth <= 576) {
-        this.moveStep = 85; // verificare ipad
-      }
-    },
   },
 
   mounted() {
-    var width = $(window).width();
-    if (width > 1200) {
-      this.moveStep = 50;
-      this.carouselLeft = 22;
-    } else if (width > 576 && width <= 1200) {
-      this.moveStep = 50;
-      this.carouselLeft = 5;
-      this.move = 10;
-
-    } else if (width <= 576) {
-      this.moveStep = 85; // verificare ipad
-    }
-    this.$nextTick(() => {
-      window.addEventListener("resize", this.onResize);
-    });
 
     this.cookieConsentVar = this.getCookie('cookieConsent');
     if (!this.cookieConsentVar) {
@@ -95,18 +61,9 @@ let app = new Vue({
 
     /////fine azzeramento cookies
 
-
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
   },
 
   methods: {
-    onResize() {
-      this.windowWidth = window.innerWidth;
-      this.move = 0;
-      this.activePost = 0;
-    },
 
     getPosts: function () {
       axios({
@@ -120,63 +77,60 @@ let app = new Vue({
           this.posts = response.data.data;
           this.posts.forEach((post, i) => {
             post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
+            post['type'] = 'posts';
+
           });
-          // this.autoCarousel();
+          this.getArticles();
+
         });
 
     },
-    autoCarousel: function () {
-      setInterval(() => {
-        this.nextPost();
-      }, 10000);
-    },
-    prevPost: function () {
-      $('#post-title').addClass('transparent');
 
-      if (this.activePost == 0) {
-        this.activePost = this.posts.length - 1;
-        this.move = this.moveStep * (this.posts.length - 1);
-      } else {
-        this.activePost -= 1;
-        this.move -= this.moveStep;
-      }
-      console.log(this.move);
-      setTimeout(() => {
-        $('#post-title').removeClass('transparent');
+    getArticles: function () {
+      axios({
+        method: "get",
+        url: window.location.origin + "/api/articles",
+        params: {
+          logged: this.logged,
+        },
+      })
+        .then((response) => {
+          this.articles = response.data.data;
 
-      }, 500);
 
-    },
+          this.articles.forEach((article, i) => {
+            article.created_at = dayjs(article.created_at).format('MMMM D, YYYY');
+            article['type'] = 'articles';
+          });
+          this.mixItems();
 
-    nextPost: function () {
-      $('#post-title').addClass('transparent');
-      if (this.activePost == this.posts.length - 1) {
-        this.activePost = 0;
-        this.move = 0;
-      } else {
-        this.activePost += 1;
-        this.move += this.moveStep;
 
-      }
-      console.log(this.move);
-
-      setTimeout(() => {
-        $('#post-title').removeClass('transparent');
-
-      }, 500);
+        });
 
     },
 
+    mixItems: function () {
+      // FUNZIONE PER MISCHIARE POST E ARTICOLI
+      let run = 0, first = 0, second = 0;
+      while (run < this.posts.length + this.articles.length) {
+        if (first > second) {
+          this.mixedItems[run] = this.articles[second];
+          second++;
+        } else {
+          this.mixedItems[run] = this.posts[first];
+          first++;
+        }
+        run++;
+      };
+      console.log(this.mixedItems);
 
-    selectPost: function (i) {
-      $('#post-title').addClass('transparent');
+      this.carouselLoaded = true;
+      console.log(this.carouselLoaded);
 
-      this.activePost = i;
-      this.move = -50 * i;
       setTimeout(() => {
-        $('#post-title').removeClass('transparent');
+        $('.carousel-item#0').addClass('active');
 
-      }, 500);
+      }, 200);
 
     },
 
@@ -193,6 +147,7 @@ let app = new Vue({
 
         }
         this.getPosts();
+
 
 
 

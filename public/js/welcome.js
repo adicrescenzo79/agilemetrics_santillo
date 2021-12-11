@@ -99,52 +99,16 @@ var app = new Vue({
   data: {
     api_token: '',
     posts: [],
+    articles: [],
     lastVisit: '',
     cookieConsentVar: false,
     cookieMsg: false,
     logged: null,
-    move: 0,
-    activePost: 0,
-    windowWidth: window.innerWidth,
     txt: "",
-    moveStep: null,
-    carouselLeft: null
-  },
-  watch: {
-    windowWidth: function windowWidth(newWidth, oldWidth) {
-      this.txt = "it changed to ".concat(newWidth, " from ").concat(oldWidth); // console.log(this.txt);
-
-      if (newWidth > 1200) {
-        this.moveStep = 50;
-        this.carouselLeft = 22;
-      } else if (newWidth > 576 && newWidth <= 1200) {
-        this.moveStep = 50;
-        this.carouselLeft = 5;
-        this.move = 10;
-      } else if (newWidth <= 576) {
-        this.moveStep = 85; // verificare ipad
-      }
-    }
+    mixedItems: [],
+    carouselLoaded: false
   },
   mounted: function mounted() {
-    var _this = this;
-
-    var width = $(window).width();
-
-    if (width > 1200) {
-      this.moveStep = 50;
-      this.carouselLeft = 22;
-    } else if (width > 576 && width <= 1200) {
-      this.moveStep = 50;
-      this.carouselLeft = 5;
-      this.move = 10;
-    } else if (width <= 576) {
-      this.moveStep = 85; // verificare ipad
-    }
-
-    this.$nextTick(function () {
-      window.addEventListener("resize", _this.onResize);
-    });
     this.cookieConsentVar = this.getCookie('cookieConsent');
 
     if (!this.cookieConsentVar) {
@@ -176,17 +140,9 @@ var app = new Vue({
     //  document.cookie = "cookieLastVisit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
     /////fine azzeramento cookies
   },
-  beforeDestroy: function beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
-  },
   methods: {
-    onResize: function onResize() {
-      this.windowWidth = window.innerWidth;
-      this.move = 0;
-      this.activePost = 0;
-    },
     getPosts: function getPosts() {
-      var _this2 = this;
+      var _this = this;
 
       axios({
         method: "get",
@@ -195,73 +151,74 @@ var app = new Vue({
           logged: this.logged
         }
       }).then(function (response) {
-        _this2.posts = response.data.data;
+        _this.posts = response.data.data;
 
-        _this2.posts.forEach(function (post, i) {
+        _this.posts.forEach(function (post, i) {
           post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
-        }); // this.autoCarousel();
+          post['type'] = 'posts';
+        });
 
+        _this.getArticles();
       });
     },
-    autoCarousel: function autoCarousel() {
-      var _this3 = this;
+    getArticles: function getArticles() {
+      var _this2 = this;
 
-      setInterval(function () {
-        _this3.nextPost();
-      }, 10000);
+      axios({
+        method: "get",
+        url: window.location.origin + "/api/articles",
+        params: {
+          logged: this.logged
+        }
+      }).then(function (response) {
+        _this2.articles = response.data.data;
+
+        _this2.articles.forEach(function (article, i) {
+          article.created_at = dayjs(article.created_at).format('MMMM D, YYYY');
+          article['type'] = 'articles';
+        });
+
+        _this2.mixItems();
+      });
     },
-    prevPost: function prevPost() {
-      $('#post-title').addClass('transparent');
+    mixItems: function mixItems() {
+      // FUNZIONE PER MISCHIARE POST E ARTICOLI
+      var run = 0,
+          first = 0,
+          second = 0;
 
-      if (this.activePost == 0) {
-        this.activePost = this.posts.length - 1;
-        this.move = this.moveStep * (this.posts.length - 1);
-      } else {
-        this.activePost -= 1;
-        this.move -= this.moveStep;
+      while (run < this.posts.length + this.articles.length) {
+        if (first > second) {
+          this.mixedItems[run] = this.articles[second];
+          second++;
+        } else {
+          this.mixedItems[run] = this.posts[first];
+          first++;
+        }
+
+        run++;
       }
 
-      console.log(this.move);
+      ;
+      console.log(this.mixedItems);
+      this.carouselLoaded = true;
+      console.log(this.carouselLoaded);
       setTimeout(function () {
-        $('#post-title').removeClass('transparent');
-      }, 500);
-    },
-    nextPost: function nextPost() {
-      $('#post-title').addClass('transparent');
-
-      if (this.activePost == this.posts.length - 1) {
-        this.activePost = 0;
-        this.move = 0;
-      } else {
-        this.activePost += 1;
-        this.move += this.moveStep;
-      }
-
-      console.log(this.move);
-      setTimeout(function () {
-        $('#post-title').removeClass('transparent');
-      }, 500);
-    },
-    selectPost: function selectPost(i) {
-      $('#post-title').addClass('transparent');
-      this.activePost = i;
-      this.move = -50 * i;
-      setTimeout(function () {
-        $('#post-title').removeClass('transparent');
-      }, 500);
+        $('.carousel-item#0').addClass('active');
+      }, 200);
     },
     getUser: function getUser() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.get('/usersapi', {}).then(function (response) {
         // console.log(response.data.success);
         if (response.data.success) {
-          _this4.logged = true; // console.log(this.logged);
+          _this3.logged = true; // console.log(this.logged);
         } else {
-          _this4.logged = false; // console.log(this.logged);
+          _this3.logged = false; // console.log(this.logged);
         }
 
-        _this4.getPosts();
+        _this3.getPosts();
       });
     },
     cookieConsentFun: function cookieConsentFun() {

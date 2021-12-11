@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/posts', 'PostController@all');
+Route::get('/articles', 'ArticleController@all');
+
 
 Route::get('/postsLogged', 'PostController@logged');
 Route::get('/postsNotLogged', 'PostController@notLogged');
