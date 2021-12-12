@@ -61,12 +61,12 @@ Route::get('/security', function () {
 
   
   
-  Route::get('posts/{slug}', function () {
-    return view('guests.posts.show');
+Route::get('posts/{slug}', function () {
+  return view('guests.posts.show');
 })->name('posts.show');
 
 Route::get('articles/{slug}', function () {
-    return view('guests.articles.show');
+  return view('guests.articles.show');
 })->name('articles.show');
 
 

@@ -17,7 +17,6 @@
                 <a :href="'/articles/'+article.slug">
                   <h5 class="card-title text-uppercase"><b>@{{article.title}}</b></h5>
                 </a>
-                <p class="card-text">@{{article.content}}</p>
                 <p class="card-date"><small class="text-muted">@{{article.created_at}}</small></p>
               </div>
             </div>

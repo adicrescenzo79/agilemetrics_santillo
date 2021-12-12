@@ -23,6 +23,11 @@
               href="{{route('posts.index')}}">Posts</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {{ Request::routeIs('articles.*') ? 'active' : '' }}"
+              href="{{route('articles.index')}}">Articoli</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link 
           {{ Request::routeIs('welcome') ? 'active' : '' }}" href="{{ url('/') }}">
               Home
@@ -51,7 +56,9 @@
 
             <div class="dropdown-menu dropdown-menu-right bg-primary-pers" aria-labelledby="navbarDropdown">
               @if (Auth::user()->email == "luca.santillo@gmail.com")
-              <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Contenuti</a>
+              <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Post</a>
+              <a class="dropdown-item" href="{{route('admin.articles.index')}}">Gestione Articoli</a>
+
               @endif
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">

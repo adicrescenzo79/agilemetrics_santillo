@@ -25,6 +25,7 @@ class ArticleController extends Controller
     public function index()
     {
         $id = Auth::id();
+        
         if ($id == 1) {
           $articles = Article::where('user_id', '=', $id)->get();
           return view('admin.articles.index', compact('articles'));
@@ -98,6 +99,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         return view('admin.articles.show', compact('article'));
+
     }
 
     /**

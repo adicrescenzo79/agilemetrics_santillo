@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                      <form class="" action="{{route('admin.articles.destroy', ['article' => $article->id])}}" method="article">
+                      <form class="" action="{{route('admin.articles.destroy', ['article' => $article->id])}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary-pers" name="button">Si</button>

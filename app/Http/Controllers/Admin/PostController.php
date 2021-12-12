@@ -50,7 +50,7 @@ class PostController extends Controller
         // 'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'cover' => 'nullable|image|max:6000',
+        'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
         'visibility' => 'required|boolean',
 
         // 'tag_ids.*' => 'exists:tags,id',
@@ -117,11 +117,12 @@ class PostController extends Controller
         // 'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'cover' => 'nullable|image|max:6000',
+        'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
         'visibility' => 'required|boolean',
 
         // 'tag_ids.*' => 'exists:tags,id',
       ]);
+
 
       $data = $request->all();
 

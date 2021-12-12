@@ -36,7 +36,7 @@
                   <button class="btn btn-primary-pers" type="button" name="button">Modifica</button>
                 </a>
 
-                <form class="" action="{{route('admin.articles.destroy', ['article' => $article->id])}}" method="article">
+                <form class="" action="{{route('admin.articles.destroy', ['article' => $article->id])}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-primary-pers" name="button">Cancella</button>
