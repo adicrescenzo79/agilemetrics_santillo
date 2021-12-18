@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div id="main-admin-articles-edit" class="container ">
+  <div id="main-article-create-edit" class="container-fluid ">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <h3>Modifica Article</h3>
@@ -45,6 +45,38 @@
               @enderror
             </div>
 
+            <div class="form-group img-upload" >
+              @if ($article->cover)
+                <div class="d-flex flex-column w-20" v-if="oldNotChanged">
+                  <img class=" w-100" src="{{asset($article->cover)}}" alt="">
+                </div>
+              @endif
+
+              <label v-if="!cover" for="cover" class="w-20">
+                {{-- <img :src="url('/media/icons/svg/camera.svg')" alt="" /> --}}
+                <span class="btn-primary-pers btn w-100">
+                  cambia la cover
+                </span>
+              </label>
+              <div v-else class="d-flex flex-column w-20">
+                <img class="loaded cover w-100" :src="cover" />
+                <button class="btn btn-primary-pers w-100" @click="removeImage">
+                  rimuovi la cover
+                </button>
+              </div>
+              <input :name="uploadCover" type="file" class="
+                  form-control-file
+                  link-ret
+                  green
+                  btn btn-my-primary
+                  d-none  @error('cover') is-invalid @enderror
+                " id="cover" value="" @change="onFileChange" />
+              @error('cover')
+              <small class="text-danger">{{ $message }}</small>
+              @enderror
+    
+            </div>
+
 
             <div class="form-group">
               <label for="content">Content</label>
@@ -58,21 +90,6 @@
 
 
 
-            <div class="form-group">
-              @if ($article->cover)
-                <div class="">
-                  <img class="cover" src="{{asset($article->cover)}}" alt="">
-                  <small class="text-danger">Attuale</small>
-                </div>
-              @endif
-
-              <label for="cover">Cover</label>
-                <input class="form-control-file @error('cover') is-invalid @enderror" id="cover" type="file" name="cover" value="">
-              @error('cover')
-                <small class="text-danger">{{ $message }}</small>
-              @enderror
-
-            </div>
 
             <div class="form-group">
 

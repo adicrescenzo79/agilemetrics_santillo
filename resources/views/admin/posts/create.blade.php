@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-group">
-              <label for="cover">Cover</Cabel>
+              <label for="cover">Cover</label>
                 <input class="form-control-file @error('cover') is-invalid @enderror" id="cover" type="file" name="cover" value="">
               @error('cover')
                 <small class="text-danger">{{ $message }}</small>

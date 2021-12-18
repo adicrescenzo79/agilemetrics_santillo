@@ -36,15 +36,22 @@
 
 @for $i from 1 through 100 {
   .px-#{$i}px {
-    @include px(#{$i}px);
+    @include px(#{$i}+'px');
   }
   .mx-#{$i}px {
-    @include mx(#{$i}px);
+    @include mx(#{$i}+'px');
   }
   .py-#{$i}px {
-    @include py(#{$i}px);
+    @include py(#{$i}+'px');
   }
   .my-#{$i}px {
-    @include my(#{$i}px);
+    @include my(#{$i}+'px');
+  }
+}
+
+
+@for $i from 0 through 100{
+  .w-#{$i}{
+    width: #{$i}+'%';
   }
 }
