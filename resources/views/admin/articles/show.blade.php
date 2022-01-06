@@ -19,7 +19,7 @@
         </div>
       </div>
       @else
-      <h1 class="my-capse">{{$article->title}}</h1>
+      <h1 class="my-caps">{{$article->title}}</h1>
       <h3 class="my-caps">{{$article->subtitle}}</h3>
 
       @endif

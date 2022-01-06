@@ -7,9 +7,9 @@
         <div class="col-md-6">
 
           <h1 class="text-capitalize">{{$post->title}}</h1>
-          {{-- @if ($post->category)
+          @if ($post->category)
             <h4>Categoria: <span class="text-uppercase"> {{$post->category->name}}</span></h4>
-          @endif --}}
+          @endif
 
           @if ($post->cover)
             <img class="cover" src="{{asset($post->cover)}}" alt="{{$post->title}}">
@@ -17,11 +17,11 @@
 
           <p>{{$post->content}}</p>
 
-          {{-- @if ($post->tags)
+          @if ($post->tags)
             @foreach ($tags as $tag)
               <small>#{{$tag->name}}</small>
             @endforeach
-          @endif --}}
+          @endif
 
           <div class="row justify-content-center">
             <a href="{{route('admin.posts.index')}}">

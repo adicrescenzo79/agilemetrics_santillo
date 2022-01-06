@@ -45,9 +45,24 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
   }
+  .carousel-caption{
+    background-color: rgba(0, 0, 0, 50%);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    right: unset;
+    left: 0;
+    bottom: 0;
+  }
+  .carousel-indicators{
+    position: unset;
+  }
   button{
     border: none;
-    
+    background-color: transparent;
+    transition: all 0.2 linear;
+    &:hover{
+    //  background-color: rgba(0, 0, 0, 50%);
+    }
   }
 }
 

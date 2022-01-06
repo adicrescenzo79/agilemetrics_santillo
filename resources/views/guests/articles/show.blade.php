@@ -3,7 +3,7 @@
 
 
 @section('content')
-  <div id="main-guests-articles-show">
+  <div id="main-guests-articles-show" class="container-fluid">
 
     <div v-if="article.cover" class="jumbo" :style="background">
       <div class="container  d-flex justify-content-center align-items-end">

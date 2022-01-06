@@ -87,7 +87,7 @@ class ArticleController extends Controller
   
         // Mail::to('nail@mail.it')->send(new SendNewMail());
   
-        return redirect()->route('admin.articles.index');
+        return redirect()->route('admin.articles.show', $article);
       }
   
     /**
@@ -159,7 +159,7 @@ class ArticleController extends Controller
     
           $article->save();
     
-          return redirect()->route('admin.articles.index');
+          return redirect()->route('admin.articles.show', $article);
         }
 
     /**

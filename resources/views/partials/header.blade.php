@@ -58,6 +58,9 @@
               @if (Auth::user()->email == "luca.santillo@gmail.com")
               <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Post</a>
               <a class="dropdown-item" href="{{route('admin.articles.index')}}">Gestione Articoli</a>
+              <a class="dropdown-item" href="{{route('admin.categories.index')}}">Gestione Categorie</a>
+              <a class="dropdown-item" href="{{route('admin.tags.index')}}">Gestione Tag</a>
+
 
               @endif
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

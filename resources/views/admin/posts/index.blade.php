@@ -36,11 +36,11 @@
                   <button class="btn btn-primary-pers" type="button" name="button">Modifica</button>
                 </a>
 
-                <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
+                {{-- <form class="" action="{{route('admin.posts.destroy', ['post' => $post->id])}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-primary-pers" name="button">Cancella</button>
-                </form>
+                </form> --}}
 
 
                 <!-- Button trigger modal -->

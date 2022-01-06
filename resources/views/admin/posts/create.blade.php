@@ -16,7 +16,7 @@
             @csrf
             @method('POST')
 
-            {{-- <div class="form-group">
+            <div class="form-group">
               <label for="category">Categoria</label>
               <select class="form-control @error('category') is-invalid @enderror" id="category" name="category_id">
                 <option value="">Seleziona la categoria</option>
@@ -27,7 +27,7 @@
               @error('name')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
-            </div> --}}
+            </div>
 
             <div class="form-group">
               <label for="title">Title</label>
@@ -77,7 +77,7 @@
             </div>
 
 
-            {{-- <div class="form-group">
+            <div class="form-group">
               <label for="tags">Tags</label> <br>
                 @foreach ($tags as $tag)
                   <div class="form-check form-check-inline">
@@ -90,7 +90,7 @@
                     <small class="text-danger">{{ $message }}</small>
                   @enderror
                 @endforeach
-            </div> --}}
+            </div>
 
 
 

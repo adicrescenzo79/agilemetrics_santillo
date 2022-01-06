@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use App\Category;
+use App\Tag;
+
 
 
 use Illuminate\Http\Request;
@@ -35,7 +38,10 @@ class PostController extends Controller
      */
     public function create()
     {
-      return view('admin.posts.create');
+      $categories = Category::all();
+      $tags = Tag::all();
+
+      return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -47,13 +53,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        // 'category_id' => 'exists:categories,id|nullable',
+        'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
         'visibility' => 'required|boolean',
 
-        // 'tag_ids.*' => 'exists:tags,id',
+        'tag_ids.*' => 'exists:tags,id',
       ]);
 
 
@@ -73,9 +79,9 @@ class PostController extends Controller
 
       $post->save();
 
-      // if (array_key_exists('tag_ids', $data)) {
-      //   $post->tags()->attach($data['tag_ids']);
-      // }
+      if (array_key_exists('tag_ids', $data)) {
+        $post->tags()->attach($data['tag_ids']);
+      }
 
       // Mail::to('nail@mail.it')->send(new SendNewMail());
 
@@ -90,7 +96,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-      return view('admin.posts.show', compact('post'));
+      $tags = Tag::all();
+
+      return view('admin.posts.show', compact('post', 'tags'));
     }
 
     /**
@@ -101,7 +109,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-      return view('admin.posts.edit', compact('post'));
+
+      $categories = Category::all();
+      $tags = Tag::all();
+
+      return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -114,13 +126,13 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
       $request->validate([
-        // 'category_id' => 'exists:categories,id|nullable',
+        'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
         'visibility' => 'required|boolean',
 
-        // 'tag_ids.*' => 'exists:tags,id',
+        'tag_ids.*' => 'exists:tags,id',
       ]);
 
 
@@ -140,11 +152,11 @@ class PostController extends Controller
       $post->update($data);
 
 
-      // if (array_key_exists('tag_ids', $data)) {
-      //   $post->tags()->sync($data['tag_ids']);
-      // } else {
-      //   $post->tags()->detach();
-      // }
+      if (array_key_exists('tag_ids', $data)) {
+        $post->tags()->sync($data['tag_ids']);
+      } else {
+        $post->tags()->detach();
+      }
 
 
 

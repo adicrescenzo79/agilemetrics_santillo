@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
           $table->string('title');
           $table->text('content');
           $table->string('slug')->unique();
+          $table->unsignedBigInteger('category_id')->nullable();
           $table->text('cover')->nullable();
           $table->tinyInteger('visibility');
           $table->timestamps();
@@ -27,6 +28,13 @@ class CreatePostsTable extends Migration
                 ->references("id")
                 ->on("users")
                 ->onDelete("cascade");
+
+
+        $table->foreign('category_id')
+        ->references('id')
+        ->on('categories')
+        ->onDelete('set null');
+
 
         });
     }

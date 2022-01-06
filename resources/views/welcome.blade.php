@@ -22,10 +22,6 @@
 
 
           <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li v-for="(line, i) in mixedItems.length" data-target="#carouselExampleIndicators" :data-slide-to="i"
-                class="active"></li>
-            </ol>
             <div class="carousel-inner">
               <a class="carousel-item pointer" v-for="(item, i) in mixedItems" v-if="item != undefined" :id="i"
                 :href="'/'+item.type+'/'+item.slug">
@@ -43,6 +39,11 @@
                     Post
                   </h6>
                   <h5>@{{item.created_at}}</h5>
+                  {{-- <ol class="carousel-indicators">
+                    <li v-for="(line, i) in mixedItems.length" data-target="#carouselExampleIndicators" :data-slide-to="i"
+                      class="active"></li>
+                  </ol> --}}
+      
                 </div>
               </a>
             </div>

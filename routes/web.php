@@ -76,7 +76,8 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 ->group(function (){
   Route::resource('posts', 'PostController');
   Route::resource('articles', 'ArticleController');
-
+  Route::resource('categories', 'CategoryController');
+  Route::resource('tags', 'TagController');
 
 });
 

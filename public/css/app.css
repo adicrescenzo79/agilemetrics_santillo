@@ -12504,10 +12504,23 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
 }
+#carousel .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  width: 100%;
+  right: unset;
+  left: 0;
+  bottom: 0;
+}
+#carousel .carousel-indicators {
+  position: unset;
+}
 #carousel button {
   border: none;
+  background-color: transparent;
+  transition: all 0.2 linear;
 }
-
 nav.navbar {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -12705,6 +12718,7 @@ body.offline h2 {
   width: 100%;
   text-align: left;
   color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   margin-bottom: 0;
