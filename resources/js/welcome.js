@@ -102,7 +102,25 @@ let app = new Vue({
             article.created_at = dayjs(article.created_at).format('MMMM D, YYYY');
             article['type'] = 'articles';
           });
-          this.mixItems();
+
+          if (this.posts.length && this.articles.length) {
+            
+            this.mixItems();
+          } else {
+            if (this.posts.length) {
+              this.mixedItems = this.posts;
+            } else {
+              this.mixedItems = this.articles;
+            }
+            this.carouselLoaded = true;
+            // console.log(this.carouselLoaded);
+      
+            setTimeout(() => {
+              $('.carousel-item#0').addClass('active');
+      
+            }, 200);
+      
+          }
 
 
         });
@@ -122,10 +140,10 @@ let app = new Vue({
         }
         run++;
       };
-      console.log(this.mixedItems);
+      // console.log(this.mixedItems);
 
       this.carouselLoaded = true;
-      console.log(this.carouselLoaded);
+      // console.log(this.carouselLoaded);
 
       setTimeout(() => {
         $('.carousel-item#0').addClass('active');
@@ -147,7 +165,6 @@ let app = new Vue({
 
         }
         this.getPosts();
-
 
 
 

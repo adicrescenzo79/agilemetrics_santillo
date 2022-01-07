@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Category;
 use App\Tag;
+use App\Mail\VipUserMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -52,15 +55,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
+      // $request->validate([
+      //   'category_id' => 'exists:categories,id|nullable',
+      //   'title' => 'required|string|max:255',
+      //   'content' => 'required|string',
+      //   'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
+      //   'visibility' => 'required|boolean',
+
+      //   'tag_ids.*' => 'exists:tags,id',
+      // ]);
+
+      $validator = Validator::make($request->all(), [
         'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
         'visibility' => 'required|boolean',
-
         'tag_ids.*' => 'exists:tags,id',
       ]);
+
+      if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+      }
+
+
 
 
       $data = $request->all();
@@ -83,7 +101,8 @@ class PostController extends Controller
         $post->tags()->attach($data['tag_ids']);
       }
 
-      // Mail::to('nail@mail.it')->send(new SendNewMail());
+      //prova mail
+      Mail::to('mail@mail.it')->send(new VipUserMail());
 
       return redirect()->route('admin.posts.index');
     }

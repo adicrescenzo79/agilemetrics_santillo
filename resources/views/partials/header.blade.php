@@ -55,11 +55,15 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right bg-primary-pers" aria-labelledby="navbarDropdown">
-              @if (Auth::user()->email == "luca.santillo@gmail.com")
+              @if (Auth::user()->role == "admin")
               <a class="dropdown-item" href="{{route('admin.posts.index')}}">Gestione Post</a>
               <a class="dropdown-item" href="{{route('admin.articles.index')}}">Gestione Articoli</a>
               <a class="dropdown-item" href="{{route('admin.categories.index')}}">Gestione Categorie</a>
               <a class="dropdown-item" href="{{route('admin.tags.index')}}">Gestione Tag</a>
+              <a class="dropdown-item" href="{{route('admin.mail.vipcreate')}}">Invita Utente Vip</a>
+
+              
+
 
 
               @endif

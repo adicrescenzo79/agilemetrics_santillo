@@ -83,6 +83,10 @@
 
     @include('partials.footer')
 
+    @if (isset($status))
+      @include('partials.notification_status')
+    @endif
+
     @yield('foot-script')
 
   </div>

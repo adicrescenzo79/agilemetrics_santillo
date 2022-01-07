@@ -74,6 +74,9 @@ Route::get('articles/{slug}', function () {
 
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 ->group(function (){
+  Route::get('vip', 'MailController@vipCreate')->name('mail.vipcreate');
+  Route::POST('vip', 'MailController@vipStore')->name('mail.vipstore');
+
   Route::resource('posts', 'PostController');
   Route::resource('articles', 'ArticleController');
   Route::resource('categories', 'CategoryController');

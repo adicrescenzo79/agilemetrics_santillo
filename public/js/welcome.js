@@ -178,7 +178,21 @@ var app = new Vue({
           article['type'] = 'articles';
         });
 
-        _this2.mixItems();
+        if (_this2.posts.length && _this2.articles.length) {
+          _this2.mixItems();
+        } else {
+          if (_this2.posts.length) {
+            _this2.mixedItems = _this2.posts;
+          } else {
+            _this2.mixedItems = _this2.articles;
+          }
+
+          _this2.carouselLoaded = true; // console.log(this.carouselLoaded);
+
+          setTimeout(function () {
+            $('.carousel-item#0').addClass('active');
+          }, 200);
+        }
       });
     },
     mixItems: function mixItems() {
@@ -199,10 +213,10 @@ var app = new Vue({
         run++;
       }
 
-      ;
-      console.log(this.mixedItems);
-      this.carouselLoaded = true;
-      console.log(this.carouselLoaded);
+      ; // console.log(this.mixedItems);
+
+      this.carouselLoaded = true; // console.log(this.carouselLoaded);
+
       setTimeout(function () {
         $('.carousel-item#0').addClass('active');
       }, 200);
