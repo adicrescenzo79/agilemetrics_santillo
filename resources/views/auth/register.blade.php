@@ -61,6 +61,37 @@
                             </div>
                         </div>
 
+                        @if (isset($_GET["token"]))
+                            <div class="form-group row">
+                                <label for="token" class="col-md-4 col-form-label text-md-right">token</label>
+
+                                <div class="col-md-6">
+                                    <input id="token" type="text" class="form-control @error('token') is-invalid @enderror" name="token" value="{{$_GET["token"]}}" required autocomplete="name" autofocus>
+
+                                    @error('token')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="role" class="col-md-4 col-form-label text-md-right">role</label>
+
+                                <div class="col-md-6">
+                                    <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{$_GET["role"]}}" required autocomplete="name" autofocus>
+
+                                    @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        @endif
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary-pers">

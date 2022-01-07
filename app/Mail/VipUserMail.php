@@ -30,7 +30,7 @@ class VipUserMail extends Mailable
      */
     public function build()
     {
-        dd($this->vipToken);
-        return $this->view('mails.vip', compact($this->vipToken));
+       // dd($this->vipToken);
+        return $this->view('mails.vip', with(['vipToken' => $this->vipToken,]));
     }
 }
