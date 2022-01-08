@@ -103,7 +103,7 @@ var app = new Vue({
     lastVisit: '',
     cookieConsentVar: false,
     cookieMsg: false,
-    logged: null,
+    role: null,
     txt: "",
     mixedItems: [],
     carouselLoaded: false
@@ -148,7 +148,7 @@ var app = new Vue({
         method: "get",
         url: window.location.origin + "/api/posts",
         params: {
-          logged: this.logged
+          role: this.role
         }
       }).then(function (response) {
         _this.posts = response.data.data;
@@ -168,7 +168,7 @@ var app = new Vue({
         method: "get",
         url: window.location.origin + "/api/articles",
         params: {
-          logged: this.logged
+          role: this.role
         }
       }).then(function (response) {
         _this2.articles = response.data.data;
@@ -227,9 +227,9 @@ var app = new Vue({
       axios.get('/usersapi', {}).then(function (response) {
         // console.log(response.data.success);
         if (response.data.success) {
-          _this3.logged = true; // console.log(this.logged);
+          _this3.role = response.data.data.role; // console.log(this.logged);
         } else {
-          _this3.logged = false; // console.log(this.logged);
+          _this3.role = null; // console.log(this.logged);
         }
 
         _this3.getPosts();

@@ -9,7 +9,7 @@ let app = new Vue({
     lastVisit: '',
     cookieConsentVar: false,
     cookieMsg: false,
-    logged: null,
+    role: null,
     txt: "",
 
     mixedItems: [],
@@ -70,7 +70,7 @@ let app = new Vue({
         method: "get",
         url: window.location.origin + "/api/posts",
         params: {
-          logged: this.logged,
+          role: this.role,
         },
       })
         .then((response) => {
@@ -91,7 +91,7 @@ let app = new Vue({
         method: "get",
         url: window.location.origin + "/api/articles",
         params: {
-          logged: this.logged,
+          role: this.role,
         },
       })
         .then((response) => {
@@ -157,10 +157,11 @@ let app = new Vue({
       }).then((response) => {
         // console.log(response.data.success);
         if (response.data.success) {
-          this.logged = true;
+          this.role = response.data.data.role;
+
           // console.log(this.logged);
         } else {
-          this.logged = false;
+          this.role = null;
           // console.log(this.logged);
 
         }

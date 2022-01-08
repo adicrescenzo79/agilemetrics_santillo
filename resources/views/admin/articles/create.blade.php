@@ -66,7 +66,7 @@
 
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea id="myArticle" class="form-control @error('content') is-invalid @enderror" type="text" id="content"
+          <textarea id="myarticle" class="form-control  @error('content') is-invalid @enderror" type="text" id="content"
             name="content" value="{{old('content')}}">
                 <table style="border-collapse: collapse; width: 100%; border=0;">
                     <tbody>
@@ -106,21 +106,17 @@
 
 
         <div class="form-group">
+          <label for="visibility">Chi può vedere questo contenuto?</label>
+          <select class="form-control @error('visibility') is-invalid @enderror" id="visibility" name="visibility">
+            <option value="">Seleziona...</option>
+            <option value="all">Tutti i visitatori</option>
+            <option value="standard">Solo gli utenti registrati</option>
+            <option value="vip">Solo gli utenti VIP</option>
 
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="visibility" id="visible" value="1" checked>
-            <label class="form-check-label" for="visible">
-              Visibile a tutti i visitatori
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class=" form-check-input" type="radio" name="visibility" id="invisible" value="0">
-            <label class="form-check-label" for="invisible">
-              Visibile ai soli iscritti
-            </label>
-          </div>
-
+          </select>
+          @error('visibility')
+            <small class="text-danger">{{ $message }}</small>
+          @enderror
         </div>
 
 

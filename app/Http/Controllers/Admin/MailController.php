@@ -67,7 +67,7 @@ class MailController extends Controller
 
                 Mail::to($request->email)->send(new VipUserMail($vipToken));
 
-                $status = 'Invito mandato correttamente all\'iondirizzo '.$request->email;
+                $status = 'Invito mandato correttamente all\'indirizzo '.$request->email;
 
                 
                 

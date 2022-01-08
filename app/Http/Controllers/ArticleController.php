@@ -53,17 +53,23 @@ class ArticleController extends Controller
 
   public function all(Request $request)
   {
-    if ($request->logged){
-      $articles = Article::orderBy('created_at', 'DESC')->get();
 
+    if ($request->role){
+
+      if ($request->role == 'admin' || $request->role == 'vip') {
+        $articles = Article::orderBy('created_at', 'DESC')->get();
+      } else{
+        $articles = Article::where('visibility', '!=', 'vip')->orderBy('created_at', 'DESC')->get();
+      }
+      
     } else {
-      $articles = Article::where('visibility', '=', 1)->orderBy('created_at', 'DESC')->get();
+      $articles = Article::where('visibility', 'all')->orderBy('created_at', 'DESC')->get();
     }
 
-      return response()->json([
-        'data' => $articles,
-        'success' => true,
-      ]);
+    return response()->json([
+      'data' => $articles,
+      'success' => true,
+    ]);
   }
 
 

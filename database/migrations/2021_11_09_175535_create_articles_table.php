@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->string('slug')->unique();
             $table->text('cover')->nullable();
-            $table->tinyInteger('visibility');
+            $table->string('visibility');
             $table->timestamps();
 
             $table->foreign("user_id")

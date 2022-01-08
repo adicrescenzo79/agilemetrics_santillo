@@ -20,19 +20,19 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
-  return view('offline');
-
+  return view('welcome'); // rimettere a offline prima di caricarlo
 })->name('offline');
 
-Route::get('/tiny', function () {
-  return view('tiny');
+// Route::get('/tiny', function () {
+//   return view('tiny');
 
-})->name('tiny');
+// })->name('tiny');
 
 
 
 Route::prefix('my')->group(function(){
   Auth::routes();
+
 });
 
 Route::get('/usersapi', 'UserController@index');
@@ -85,3 +85,5 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 });
 
 Route::post('/upload', 'PostTasksController@upload');
+
+Route::post('invitation', 'UserController@invitationStore')->name('users.invitation');

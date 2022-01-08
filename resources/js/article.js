@@ -8,8 +8,12 @@ let app = new Vue({
 
     },
     mounted() {
+        if ($('#old-pic')) {
+            this.cover = $('#old-pic').attr('src');
+        };
+
         tinymce.init({
-            selector: 'textarea',
+            selector: 'textarea#myarticle',
 
             image_class_list: [
                 { title: 'img-responsive', value: 'img-responsive' },
@@ -82,6 +86,7 @@ let app = new Vue({
 
         },
         removeImage: function (e) {
+            event.preventDefault()
             this.cover = "";
             this.uploadCover = '';
         },

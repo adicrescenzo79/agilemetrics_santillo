@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container-fluid" id="main-article-create-edit">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <h3>Nuovo Post</h3>
@@ -24,7 +24,7 @@
                   <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
               </select>
-              @error('name')
+              @error('category')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
             </div>
@@ -46,35 +46,44 @@
 
             </div>
 
-            <div class="form-group">
-              <label for="cover">Cover</label>
-                <input class="form-control-file @error('cover') is-invalid @enderror" id="cover" type="file" name="cover" value="">
+            <div class="form-group img-upload">
+              <label v-if="!cover" for="cover">
+                {{-- <img :src="url('/media/icons/svg/camera.svg')" alt="" /> --}}
+                <span class="btn-primary-pers btn ">
+                  scegli una cover
+                </span>
+              </label>
+              <div v-else class="d-flex flex-column w-20">
+                <img class="loaded cover w-100" :src="cover" />
+                <button class="btn btn-primary-pers w-100" @click="removeImage">
+                  rimuovi la cover
+                </button>
+              </div>
+              <input :name="uploadCover" type="file" class="
+                  form-control-file
+                  link-ret
+                  green
+                  btn btn-my-primary
+                  d-none  @error('cover') is-invalid @enderror
+                " id="cover" value="" @change="onFileChange" />
               @error('cover')
-                <small class="text-danger">{{ $message }}</small>
-              @enderror
-
-            </div>
-
-            <div class="form-group">
-
-              <div class="form-check">
-                  <input class="form-check-input" type="radio" name="visibility" id="visible" value="1" checked>
-                  <label class="form-check-label" for="visible">
-                      Visibile a tutti i visitatori
-                  </label>
-              </div>
-
-              <div class="form-check">
-                  <input class=" form-check-input" type="radio" name="visibility" id="invisible" value="0">
-                  <label class="form-check-label" for="invisible">
-                    Visibile ai soli iscritti
-                  </label>
-              </div>
-
-              @error('image')
               <small class="text-danger">{{ $message }}</small>
               @enderror
             </div>
+    
+            <div class="form-group">
+              <label for="visibility">Chi può vedere questo contenuto?</label>
+              <select class="form-control @error('visibility') is-invalid @enderror" id="visibility" name="visibility">
+                <option value="all">Tutti i visitatori</option>
+                <option value="standard">Solo gli utenti registrati</option>
+                <option value="vip">Solo gli utenti VIP</option>
+
+              </select>
+              @error('visibility')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
+            </div>
+
 
 
             <div class="form-group">
@@ -102,4 +111,8 @@
     </div>
   </div>
 
+@endsection
+
+@section('foot-script')
+<script src="{{asset('js/article.js')}}" charset="utf-8"></script>
 @endsection

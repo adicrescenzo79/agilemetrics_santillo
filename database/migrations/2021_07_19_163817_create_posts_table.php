@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
           $table->string('slug')->unique();
           $table->unsignedBigInteger('category_id')->nullable();
           $table->text('cover')->nullable();
-          $table->tinyInteger('visibility');
+          $table->string('visibility');
           $table->timestamps();
 
           $table->foreign("user_id")

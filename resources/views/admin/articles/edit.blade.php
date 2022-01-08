@@ -48,14 +48,41 @@
             <div class="form-group img-upload" >
               @if ($article->cover)
                 <div class="d-flex flex-column w-20" v-if="oldNotChanged">
-                  <img class=" w-100" src="{{asset($article->cover)}}" alt="">
+                  <img class=" w-100 d-none" id="old-pic" src="{{asset($article->cover)}}" alt="">
                 </div>
-              @endif
+                
+                <label v-if="!cover" for="cover">
+                  {{-- <img :src="url('/media/icons/svg/camera.svg')" alt="" /> --}}
+                  <span class="btn-primary-pers btn ">
+                    scegli una cover
+                  </span>
+                </label>
+  
+                
+                <div v-else class="d-flex flex-column w-20">
+                  <img class="loaded cover w-100" :src="cover" />
+                  <button class="btn btn-primary-pers w-100" @click="removeImage">
+                    rimuovi la cover
+                  </button>
+                </div>
+  
+                <input :name="uploadCover" type="file" class="
+                    form-control-file
+                    link-ret
+                    green
+                    btn btn-my-primary
+                    d-none  @error('cover') is-invalid @enderror
+                  " id="cover" value="" @change="onFileChange" />
+                @error('cover')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
 
-              <label v-if="!cover" for="cover" class="w-20">
+              @else
+
+              <label v-if="!cover" for="cover">
                 {{-- <img :src="url('/media/icons/svg/camera.svg')" alt="" /> --}}
-                <span class="btn-primary-pers btn w-100">
-                  cambia la cover
+                <span class="btn-primary-pers btn ">
+                  scegli una cover
                 </span>
               </label>
               <div v-else class="d-flex flex-column w-20">
@@ -75,12 +102,18 @@
               <small class="text-danger">{{ $message }}</small>
               @enderror
     
+
+              @endif
+
+
+              
+    
             </div>
 
 
             <div class="form-group">
               <label for="content">Content</label>
-              <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="8" cols="80">{{old('content', $article->content)}}</textarea>
+              <textarea id="myarticle" class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="8" cols="80">{{old('content', $article->content)}}</textarea>
               @error('content')
                 <small class="text-danger">{{ $message }}</small>
               @enderror
@@ -92,20 +125,16 @@
 
 
             <div class="form-group">
+              <label for="visibility">Chi può vedere questo contenuto?</label>
+              <select class="form-control @error('visibility') is-invalid @enderror" id="visibility" name="visibility">
+                <option value="all" {{'all' == old('visibility', $article->visibility) ? 'selected' : ''}}>Tutti i visitatori</option>
+                <option value="standard" {{'standard' == old('visibility', $article->visibility) ? 'selected' : ''}}>Solo gli utenti registrati</option>
+                <option value="vip" {{'vip' == old('visibility', $article->visibility) ? 'selected' : ''}}>Solo gli utenti VIP</option>
 
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="visibility" id="visible" value="1" {{ ($article->visibility == 1) ? "checked" : "" }}>
-                <label class="form-check-label" for="visible">
-                  Visibile a tutti i visitatori
-                </label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="visibility" id="invisible" value="0" {{ ($article->visibility == 0) ? "checked" : "" }}>
-                <label class="form-check-label" for="invisible">
-                  Visibile ai soli iscritti
-                </label>
-              </div>
+              </select>
+              @error('visibility')
+                <small class="text-danger">{{ $message }}</small>
+              @enderror
             </div>
 
 

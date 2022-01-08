@@ -70,7 +70,7 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
-        'visibility' => 'required|boolean',
+        'visibility' => 'required|string',
         'tag_ids.*' => 'exists:tags,id',
       ]);
 
@@ -102,9 +102,10 @@ class PostController extends Controller
       }
 
       //prova mail
-      Mail::to('mail@mail.it')->send(new VipUserMail());
+      //Mail::to('mail@mail.it')->send(new VipUserMail());
 
-      return redirect()->route('admin.posts.index');
+     return redirect()->route('admin.posts.show', $post);
+
     }
 
     /**
@@ -149,7 +150,7 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'cover' => 'nullable|mimes:jpeg,jpg,png,gif|max:10000',
-        'visibility' => 'required|boolean',
+        'visibility' => 'required|string',
 
         'tag_ids.*' => 'exists:tags,id',
       ]);
@@ -181,7 +182,7 @@ class PostController extends Controller
 
       $post->save();
 
-      return redirect()->route('admin.posts.index');
+      return redirect()->route('admin.posts.show', $post);
     }
 
     /**

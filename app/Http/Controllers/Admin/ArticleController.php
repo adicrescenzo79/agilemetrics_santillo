@@ -52,6 +52,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
           // 'category_id' => 'exists:categories,id|nullable',
           'title' => 'required|string|max:255',
@@ -59,7 +60,7 @@ class ArticleController extends Controller
           'content' => 'required|string',
          // 'cover' => 'nullable|image|max:6000',
           'cover' => 'mimes:jpeg,jpg,png,gif|nullable|max:10000',
-          'visibility' => 'required|boolean',
+          'visibility' => 'required|string',
 
           // 'tag_ids.*' => 'exists:tags,id',
         ]);
@@ -128,7 +129,7 @@ class ArticleController extends Controller
             'subtitle' => 'required|string|max:255',
             'content' => 'required|string',
             'cover' => 'mimes:jpeg,jpg,png,gif|nullable|max:10000',
-            'visibility' => 'required|boolean',
+            'visibility' => 'required|string',
     
                 // 'tag_ids.*' => 'exists:tags,id',
           ]);
