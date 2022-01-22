@@ -29,6 +29,13 @@
     
     <main>
     {{-- <a href="http://localhost:8000/my/register?token={{$vipToken->token}}">Accetta l'invito</a> --}}
+    <div class="container">
+            <h1>
+                Agilemetrics ha il piacere di invitarla a diventare un utente VIP
+            </h1>
+            <a href="">Accetta l'invito</a>
+
+        </div>
     </main>
     
     <footer>
@@ -38,9 +45,23 @@
 </body>
 
 <style>
-    .navbar-brand {
+    body{
+        font-family: 'Poppins', sans-serif;
+       
+
+    }
+    /* header{
+        display: flex;
+        justify-content: center;
+    } */
+    .container{
+        width: 60vw;
+        margin: 0 auto;
+    }
+    h1 {
     color: #20292f;
     font-size: 1.64rem;
     font-weight: 600;
+    }
 }
 </style>

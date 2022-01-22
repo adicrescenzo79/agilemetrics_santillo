@@ -134,7 +134,6 @@ var app = new Vue({
       this.dateCheck();
     }
 
-    console.log('ultima visita', new Date(this.lastVisit));
     this.getUser(); ////azzeramento cookies
     //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
@@ -155,8 +154,6 @@ var app = new Vue({
         _this.posts = response.data.data;
 
         _this.posts.forEach(function (post, i) {
-          console.log(new Date(post.created_at) > new Date(_this.lastVisit));
-
           if (new Date(post.created_at) > new Date(_this.lastVisit)) {
             post['new'] = true;
           } else {
@@ -265,8 +262,7 @@ var app = new Vue({
     },
     dateCheck: function dateCheck() {
       var cookieLastVisit = this.getCookie('cookieLastVisit');
-      this.lastVisit = cookieLastVisit;
-      console.log('ciao' + cookieLastVisit); //  console.log('ultima visita ' + cookieLastVisit);
+      this.lastVisit = cookieLastVisit; //  console.log('ultima visita ' + cookieLastVisit);
 
       var cookieControl = this.getCookie('cookieControl'); // console.log('controllo ' + cookieControl);
       // dayjs.extend(LocalizedFormat)

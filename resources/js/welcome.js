@@ -52,7 +52,6 @@ let app = new Vue({
 
     }
 
-    console.log('ultima visita', new Date(this.lastVisit));
 
 
     
@@ -81,7 +80,6 @@ let app = new Vue({
         .then((response) => {
           this.posts = response.data.data;
           this.posts.forEach((post, i) => {
-            console.log(new Date(post.created_at) > new Date(this.lastVisit));
 
             if (new Date(post.created_at) > new Date(this.lastVisit)) {
               
@@ -217,7 +215,6 @@ let app = new Vue({
     dateCheck: function () {
       let cookieLastVisit = this.getCookie('cookieLastVisit');
       this.lastVisit = cookieLastVisit;
-      console.log('ciao' + cookieLastVisit);
      
       //  console.log('ultima visita ' + cookieLastVisit);
       let cookieControl = this.getCookie('cookieControl');
