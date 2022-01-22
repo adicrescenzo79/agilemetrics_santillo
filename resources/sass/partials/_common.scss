@@ -12,7 +12,7 @@
   background-color: $primaryColor;
   //border-color: $primaryColorDark;
   color: $txtColorLight;
-  border: none;
+  border: 1px solid $primaryColor;
   border-radius: 0;
   text-transform: uppercase;
   font-weight: 700;
@@ -26,6 +26,29 @@
   &:focus {
     box-shadow: 0 0 0 0.2rem rgb(117 47 49 / 25%);
   }
+}
+
+.btn-secondary-pers{
+  background-color: $txtColorLight;
+  //border-color: $primaryColorDark;
+  color: $primaryColor;
+  border: 1px solid $primaryColor;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $txtColorLight;
+    //border-color: $primaryColorDark !important;
+    color: $primaryColorDark !important;
+    
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgb(117 47 49 / 25%);
+  }
+
 }
 
 a:hover {

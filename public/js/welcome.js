@@ -134,6 +134,7 @@ var app = new Vue({
       this.dateCheck();
     }
 
+    console.log('ultima visita', new Date(this.lastVisit));
     this.getUser(); ////azzeramento cookies
     //  document.cookie = "cookieConsent=true; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     //  document.cookie = "cookieControl=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
@@ -154,6 +155,14 @@ var app = new Vue({
         _this.posts = response.data.data;
 
         _this.posts.forEach(function (post, i) {
+          console.log(new Date(post.created_at) > new Date(_this.lastVisit));
+
+          if (new Date(post.created_at) > new Date(_this.lastVisit)) {
+            post['new'] = true;
+          } else {
+            post['new'] = false;
+          }
+
           post.created_at = dayjs(post.created_at).format('MMMM D, YYYY');
           post['type'] = 'posts';
         });
@@ -174,6 +183,12 @@ var app = new Vue({
         _this2.articles = response.data.data;
 
         _this2.articles.forEach(function (article, i) {
+          if (new Date(article.created_at) > _this2.lastVisit) {
+            article['new'] = true;
+          } else {
+            article['new'] = false;
+          }
+
           article.created_at = dayjs(article.created_at).format('MMMM D, YYYY');
           article['type'] = 'articles';
         });
@@ -250,13 +265,13 @@ var app = new Vue({
     },
     dateCheck: function dateCheck() {
       var cookieLastVisit = this.getCookie('cookieLastVisit');
-      this.lastVisit = cookieLastVisit; //  console.log('ultima visita ' + cookieLastVisit);
+      this.lastVisit = cookieLastVisit;
+      console.log('ciao' + cookieLastVisit); //  console.log('ultima visita ' + cookieLastVisit);
 
       var cookieControl = this.getCookie('cookieControl'); // console.log('controllo ' + cookieControl);
       // dayjs.extend(LocalizedFormat)
 
-      var now = new Date();
-      now = dayjs(now).format('MMMM D, YYYY'); // console.log('oggi ' + now);
+      var now = new Date(); // console.log('oggi ' + now);
       // let nowFormat = dayjs(now).format('MM/DD/YYYY');
       // console.log(nowFormat);
       // let cookieLastVisitFormat = dayjs(cookieLastVisit).format('MM/DD/YYYY');

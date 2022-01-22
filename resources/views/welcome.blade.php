@@ -12,6 +12,27 @@
     </div>
   </div>
 
+  <div v-if="cookieMsg" id="cookies" class="modal flex d-flex align-items-center justify-content-center position-fixed" tabindex="-1" v-cloak>
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cookies</h5>
+          <button  @click="cookieMsg = false"  type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Per una migliore fruizione dei contenuti si consiglia l'utilizzo dei cookies</p>
+        </div>
+        <div class="modal-footer">
+          <button @click="cookieMsg = false"  type="button" class="btn btn-secondary-pers" data-dismiss="modal">Chiudi</button>
+          <button @click="cookieConsentFun()" type="button" class="btn btn-primary-pers">Accetta i cookies</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   {{-- SLIDE ULTIMI POST --}}
 
 

@@ -69,6 +69,9 @@ Route::get('articles/{slug}', function () {
   return view('guests.articles.show');
 })->name('articles.show');
 
+Route::get('mail', function(){
+  return view('mail');
+})->name('mail');
 
   
 

@@ -2,13 +2,20 @@
   #cookies {
     // top: 30vh;
     top: 0;
-    width: 100vw;
+    //width: 100vw;
     //  height: 100vh;
     background-color: rgba(144, 59, 62, 0.5);
     z-index: 200;
+    display: block;
+    height: 100vh!important;
+    width: 100vw!important;
   }
 
   section#posts {
-    
+    svg.new{
+      right: 0;
+      bottom: 0;
+
+    }
   }
 }

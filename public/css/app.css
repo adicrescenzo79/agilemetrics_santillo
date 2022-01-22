@@ -12474,7 +12474,7 @@ body {
 .btn-primary-pers {
   background-color: #903B3E;
   color: #fff;
-  border: none;
+  border: 1px solid #903B3E;
   border-radius: 0;
   text-transform: uppercase;
   font-weight: 700;
@@ -12484,6 +12484,22 @@ body {
   color: #fff;
 }
 .btn-primary-pers:focus {
+  box-shadow: 0 0 0 0.2rem rgba(117, 47, 49, 0.25);
+}
+
+.btn-secondary-pers {
+  background-color: #fff;
+  color: #903B3E;
+  border: 1px solid #903B3E;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.btn-secondary-pers:hover, .btn-secondary-pers:focus, .btn-secondary-pers:active {
+  background-color: #fff;
+  color: #752f31 !important;
+}
+.btn-secondary-pers:focus {
   box-shadow: 0 0 0 0.2rem rgba(117, 47, 49, 0.25);
 }
 
@@ -12687,10 +12703,17 @@ main {
 
 #main-welcome #cookies {
   top: 0;
-  width: 100vw;
   background-color: rgba(144, 59, 62, 0.5);
   z-index: 200;
+  display: block;
+  height: 100vh !important;
+  width: 100vw !important;
 }
+#main-welcome section#posts svg.new {
+  right: 0;
+  bottom: 0;
+}
+
 body.offline {
   background-image: url("../img/scott-graham-5fNmWej4tAA-unsplash.jpg");
   background-size: cover;
